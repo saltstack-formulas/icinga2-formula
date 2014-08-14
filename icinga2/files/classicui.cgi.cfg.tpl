@@ -1,4 +1,4 @@
-{% from "icinga2/map.jinja" import icinga2 with context %}
+{%- from "icinga2/map.jinja" import icinga2 with context %}
 # Icinga 2 Classic UI configuration
 #
 # requires icinga-gui package
