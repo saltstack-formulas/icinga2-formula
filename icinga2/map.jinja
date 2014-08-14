@@ -1,0 +1,8 @@
+{% set icinga2 = salt['grains.filter_by']({
+    'Debian': {
+        'classicui': {
+            'users': {}
+        }
+    },
+
+}, merge=salt['pillar.get']('icinga2:lookup')) %}

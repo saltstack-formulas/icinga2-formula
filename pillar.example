@@ -1,0 +1,6 @@
+icinga2:
+  lookup:
+    classicui:
+      users:
+        admin: $apr1$VxiIkiLL$44VZAqDUUsOoW4zns1USw0
+        anotheradmin: $apr1$R9s6cQSW$C5KdQSdm5/1XACnRFMWNO/
