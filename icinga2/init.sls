@@ -42,6 +42,8 @@ icinga2:
 
 /etc/icinga2/conf.d/hosts/{{ host }}.conf:
   file.managed:
+    - wach_in:
+      - service: icinga2
     - contents: |
 {{ printconfig("Host", host, hostconf) }}
 
@@ -53,6 +55,8 @@ icinga2:
 
 /etc/icinga2/conf.d/hosts/{{ host }}/{{ service }}.conf:
   file.managed:
+    - wach_in:
+      - service: icinga2
     - contents: |
 {{ printconfig("Service", service, serviceconf) }}
 
