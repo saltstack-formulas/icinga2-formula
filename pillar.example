@@ -4,3 +4,31 @@ icinga2:
       users:
         admin: $apr1$VxiIkiLL$44VZAqDUUsOoW4zns1USw0
         anotheradmin: $apr1$R9s6cQSW$C5KdQSdm5/1XACnRFMWNO/
+    conf:
+      hosts:
+        example.com:
+          import: generic-host
+          address: 1.2.3.4
+          vars:
+            sla: "24x7"
+          services:
+            http:
+              import: generic-service
+              host_name: example.com
+              check_command: http
+              vars:
+                sla: "24x7"
+            ssh:
+              import: generic-service
+              host_name: example.com
+              check_command: ssh
+              vars:
+                sla: "24x7"
+            ssh_alt:
+              import: generic-service
+              host_name: example.com
+              check_command: ssh
+              vars:
+                ssh_port: 43
+                sla: "24x7"
+
