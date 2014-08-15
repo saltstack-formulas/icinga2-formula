@@ -2,7 +2,9 @@
 icinga2-formula
 ===============
 
-A salt formula that installs and configures icinga2, currently on Debian wheezy only.
+A salt formula that installs and configures icinga2, currently on Debian wheezy only, but other
+installation source can be easily added. Configuration via pillar currently for hosts and
+services only.
 
 .. note::
 
