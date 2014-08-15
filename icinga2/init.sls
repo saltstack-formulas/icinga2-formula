@@ -55,6 +55,8 @@ icinga2:
 
 /etc/icinga2/conf.d/hosts/{{ host }}/{{ service }}.conf:
   file.managed:
+    - require:
+      - file: /etc/icinga2/conf.d/hosts/{{ host }}
     - watch_in:
       - service: icinga2
     - contents: |
