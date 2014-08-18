@@ -7,7 +7,13 @@ nagios-nrpe-server:
     - watch:
       - file: /etc/nagios/nrpe_local.cfg
 
-{% if icinga2.nrpe.config is defined %}
+/etc/defaults/nagios-nrpe-server:
+  file.managed:
+    - contents: |
+{%- for key, value in icinga2.nrpe.defaults.iteritems() %}
+        {{ key }}={{ value }}
+{%- endfor %}
+
 /etc/nagios/nrpe_local.cfg:
   file.managed:
     - contents: |
@@ -18,5 +24,4 @@ nagios-nrpe-server:
 {%- for key, value in icinga2.nrpe.config.commands.iteritems() %}
         command[{{ key }}] = {{ value }}
 {%- endfor %}
-{% endif%}
 {% endif%}
