@@ -1,7 +1,11 @@
 {% from "icinga2/map.jinja" import icinga2 with context %}
 
 nagios-nrpe-server:
-  pkg.installed
+  pkg:
+    - installed
+  service.running:
+    - watch:
+      - file: /etc/nagios/nrpe_local.cfg
 
 {% if icinga2.nrpe.config is defined %}
 /etc/nagios/nrpe_local.cfg:
