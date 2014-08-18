@@ -6,6 +6,7 @@ nagios-nrpe-server:
   service.running:
     - watch:
       - file: /etc/nagios/nrpe_local.cfg
+      - file: /etc/defaults/nagiros-nrpe-server
 
 /etc/defaults/nagios-nrpe-server:
   file.managed:
