@@ -9,7 +9,34 @@ icinga2:
       users:
         admin: $apr1$VxiIkiLL$44VZAqDUUsOoW4zns1USw0
         anotheradmin: $apr1$R9s6cQSW$C5KdQSdm5/1XACnRFMWNO/
+
     conf:
+      services:
+        ping4:
+          type: Service
+          conf:
+            import: "generic-service"
+            assign:
+              - "\"linux-servers\" in host.groups"
+            ignore:
+              - "host.address == \"\""
+      templates:
+        special-host:
+          type: Host
+          conf:
+            vars:
+              sla: "24x5"
+        special-downtime:
+          type: ScheduledDowntime
+          conf:
+            ranges:
+              monday: "02:00-03:00"
+        special-notification:
+          type: Notification
+          conf:
+            types:
+              - FlappingStart
+              - FlappingEnd
       hosts:
         example.com:
           import: generic-host
