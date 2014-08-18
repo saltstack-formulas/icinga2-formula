@@ -6,9 +6,9 @@ nagios-nrpe-server:
   service.running:
     - watch:
       - file: /etc/nagios/nrpe_local.cfg
-      - file: /etc/defaults/nagios-nrpe-server
+      - file: /etc/default/nagios-nrpe-server
 
-/etc/defaults/nagios-nrpe-server:
+/etc/default/nagios-nrpe-server:
   file.managed:
     - contents: |
 {%- for key, value in icinga2.nrpe.defaults.iteritems() %}
