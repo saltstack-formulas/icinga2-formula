@@ -2,19 +2,21 @@
 
 {%- macro printconfig(object, name, config)%}
         object {{ object}} "{{ name }}" {
-{%- for key, value in config.iteritems() if not value is mapping %}
-          {{ key }} {% if key != "import" %}= {% endif %}"{{ value }}"
-{%- endfor %}
+{%- for key, value in config.iteritems()%}
+{%- if key == "import" %}
+          {{key}} "{{ value }}"
 
-{%- if config.vars is defined %}
+{%- elif key == "vars"  %}
 {%- for key, value in config.vars.iteritems() %}
           vars.{{key}} = "{{ value }}"
 {%- endfor %}
+{%- elif key == "services"  %}
+{%- else %}
+          {{ key }} = "{{ value }}"
 {%- endif %}
+{%- endfor %}
         }
 {%-endmacro%}
-
-
 
 {% if grains['os_family'] in ['Debian']  %}
 
@@ -37,6 +39,7 @@ icinga2:
   service:
     - running
 
+### Begin hosts configuration
 {% if icinga2.conf.hosts is defined %}
 {% for host, hostconf in icinga2.conf.hosts.iteritems() %}
 
@@ -67,5 +70,11 @@ icinga2:
 
 {% endfor %}
 {% endif %}
+
+### End hosts configuration
+
+### Begin template configuration
+
+
 
 {% endif %}
