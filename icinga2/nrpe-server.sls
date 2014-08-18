@@ -19,7 +19,7 @@ nagios-nrpe-server:
   file.managed:
     - contents: |
 {%- for key, value in icinga2.nrpe.config.iteritems() if not value is mapping %}
-        {{ key }} = {{ value }}
+        {{ key }}={{ value }}
 {%- endfor %}
 {% if icinga2.nrpe.config.commands is defined %}
 {%- for key, value in icinga2.nrpe.config.commands.iteritems() %}
