@@ -1,5 +1,7 @@
 icinga2:
   lookup:
+    pkgs:
+      - nagios-nrpe-plugin
     nrpe:
       config:
         server_port: 5666

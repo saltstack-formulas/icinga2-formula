@@ -56,6 +56,11 @@ icinga2:
   service:
     - running
 
+{% for package in icinga2.pkgs %}
+{{ package }}:
+  pkg.installed
+{% endfor %}
+
 ### Begin hosts configuration
 {% if icinga2.conf.hosts is defined %}
 {% for host, hostconf in icinga2.conf.hosts.iteritems() %}
