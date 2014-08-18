@@ -25,3 +25,8 @@ Installs and configures the icinga2 package.
 ---------------------
 
 Installs and configures the icinga2 package and configures the classicui.
+
+``icinga2.nrpe-server``
+-----------------------
+
+Installs and configures the nrpe-server to perform checks on non-local hosts.

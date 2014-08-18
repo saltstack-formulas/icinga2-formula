@@ -1,5 +1,10 @@
 icinga2:
   lookup:
+    nrpe:
+      config:
+        server_port: 5666
+        commands:
+          check_users: /usr/lib/nagios/plugins/check_users -w 5 -c 10
     classicui:
       users:
         admin: $apr1$VxiIkiLL$44VZAqDUUsOoW4zns1USw0
