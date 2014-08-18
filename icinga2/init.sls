@@ -14,18 +14,18 @@
 {%- elif key == "services"  %}
 
 {%- elif key == "ranges"  %}
-         ranges = {
+          ranges = {
 {%- for rangekey, rangevalue in config.ranges.iteritems() %}
-           {{ rangekey }} = "{{ rangevalue }}"
+            {{ rangekey }} = "{{ rangevalue }}"
 {%- endfor %}
-         }
+          }
 
 {%- elif key == "states" or key == "types" %}
-         {{ key }} = [ {{ value|join(",") }} ]
+          {{ key }} = [ {{ value|join(",") }} ]
 
 {%- elif key == "assign" or key == "ignore" %}
 {%- for item in value %}
-         {{ key }} where {{ item }}
+          {{ key }} where {{ item }}
 {%- endfor %}
 
 {%- else %}
