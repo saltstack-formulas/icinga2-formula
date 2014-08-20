@@ -1,7 +1,7 @@
 {% from "icinga2/map.jinja" import icinga2 with context %}
 
 {%- macro printconfig(type, object, name, config, applyto="")%}
-        {{ type }} {{ object }} "{{ name }}" {{ applyto }}{% if applyto !="" %} {% endif %}{
+        {{ type }} {{ object }} "{{ name }}" {% if applyto !="" %}to {% endif %}{{ applyto }}{% if applyto !="" %} {% endif %}{
 {%- for key, value in config.iteritems()%}
 {%- if key == "import" %}
           {{key}} "{{ value }}"
