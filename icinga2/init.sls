@@ -1,7 +1,7 @@
 {% from "icinga2/map.jinja" import icinga2 with context %}
 
-{%- macro printconfig(type, object, name, config)%}
-        {{ type }} {{ object }} "{{ name }}" {
+{%- macro printconfig(type, object, name, config, applyto="")%}
+        {{ type }} {{ object }} "{{ name }}" {{ applyto }} {
 {%- for key, value in config.iteritems()%}
 {%- if key == "import" %}
           {{key}} "{{ value }}"
@@ -121,6 +121,7 @@ icinga2:
 /etc/icinga2/conf.d/{{ type }}:
   file.directory
 {% for apply, applyinfo in icinga2.conf[type].iteritems() %}
+{% set applyto = applyinfo["apply_to"]|default('') %}
 /etc/icinga2/conf.d/{{ type }}/{{ apply }}.conf:
   file.managed:
     - require:
@@ -128,7 +129,7 @@ icinga2:
     - watch_in:
       - service: icinga2
     - contents: |
-{{ printconfig("apply", applyinfo["type"], apply, applyinfo["conf"]) }}
+{{ printconfig("apply", applyinfo["type"], apply, applyinfo["conf"], applyto) }}
 
 {% endfor%}
 {% endif %}
