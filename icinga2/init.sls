@@ -20,7 +20,7 @@
 {%- endfor %}
           }
 
-{%- elif key == "states" or key == "types" %}
+{%- elif key in ["states", "types", "user_groups" %}
           {{ key }} = [ {{ value|join(",") }} ]
 
 {%- elif key == "assign" or key == "ignore" %}
