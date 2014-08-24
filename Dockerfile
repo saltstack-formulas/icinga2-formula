@@ -10,7 +10,7 @@ RUN echo "base:" > /srv/pillar/top.sls
 RUN echo "  '*':" >> /srv/pillar/top.sls
 RUN echo "    - example" >> /srv/pillar/top.sls
 # starting the icinga2 server fails in docker
-RUN salt-call --local state.sls icinga2 | tee log.txt && grep "Failed:     1" log.txt
+RUN salt-call --local state.sls icinga2 | tee log.txt && grep "Failed:     0" log.txt
 
 # Test nrpe server installation
 FROM      martinhoefling/salt-minion:debian

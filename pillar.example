@@ -15,15 +15,6 @@ icinga2:
         anotheradmin: $apr1$R9s6cQSW$C5KdQSdm5/1XACnRFMWNO/
 
     conf:
-      services:
-        ping4:
-          type: Service
-          conf:
-            import: "generic-service"
-            assign:
-              - "\"linux-servers\" in host.groups"
-            ignore:
-              - "host.address == \"\""
       templates:
         special-host:
           type: Host
