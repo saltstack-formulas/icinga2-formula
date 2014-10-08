@@ -4,11 +4,13 @@
 
 include:
   - icinga2
+  - .repositories
 
 icinga2-classicui:
   pkg.installed:
     - require:
       - sls: icinga2
+      - pkgrepo: icinga_repo
 
 /etc/icinga2/classicui/htpasswd.users:
   file.managed:

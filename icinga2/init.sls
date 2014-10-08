@@ -1,3 +1,6 @@
+include:
+  - .repositories
+
 {% from "icinga2/map.jinja" import icinga2 with context %}
 
 {%- macro printconfig(type, object, name, config, applyto="")%}
@@ -5,7 +8,11 @@
 {%- for key, value in config.iteritems()%}
 {%- if key == "import" %}
           {{key}} "{{ value }}"
+{%- endif %}
+{%- endfor %}
 
+{%- for key, value in config.iteritems()%}
+{%- if key == "import" %}
 {%- elif key == "vars"  %}
 {%- for varkey, varvalue in config.vars.iteritems() %}
           vars.{{ varkey }} = "{{ varvalue }}"
@@ -37,28 +44,18 @@
 
 {% if grains['os_family'] in ['Debian']  %}
 
-debmon_repo_required_packages:
-  pkg.installed:
-    - name: python-apt
-
-debmon_repo:
-  pkgrepo.managed:
-    - humanname: debmon
-    - name: deb http://debmon.org/debmon debmon-wheezy main
-    - file: /etc/apt/sources.list.d/debmon.list
-    - key_url: http://debmon.org/debmon/repo.key
-    - require:
-      - pkg: debmon_repo_required_packages
-
 icinga2:
-  pkg:
-    - installed
-  service:
-    - running
+  pkg.installed:
+    - require:
+      - pkgrepo: icinga_repo
+  service.running:
+    - enable: True
 
 {% for package in icinga2.pkgs %}
 {{ package }}:
-  pkg.installed
+  pkg.installed:
+    - require:
+      - pkgrepo: icinga_repo
 {% endfor %}
 
 ### Begin hosts configuration
@@ -95,10 +92,28 @@ icinga2:
 
 ### End hosts configuration
 
+### Begin hostgroups configuration
+
+{% if icinga2.conf.hostgroups is defined %}
+/etc/icinga2/conf.d/hostsgroups.conf:
+  file.managed:
+    - watch_in:
+      - service: icinga2
+    - contents: |
+{% for hostgroup, hostgroupconf in icinga2.conf.hostgroups.iteritems() %}
+{{ printconfig("object", "HostGroup", hostgroup, hostgroupconf) }}
+
+{% endfor %}
+{% endif %}
+### End hostgroups configuration
+
 ### Begin template configuration
 {% if icinga2.conf.templates is defined %}
 /etc/icinga2/conf.d/templates:
-  file.directory
+  file.directory:
+    - require:
+      - pkg: icinga2
+
 {% for template, templateinfo in icinga2.conf.templates.iteritems() %}
 /etc/icinga2/conf.d/templates/{{ template }}.conf:
   file.managed:
@@ -119,7 +134,10 @@ icinga2:
 
 {% if icinga2.conf[type] is defined %}
 /etc/icinga2/conf.d/{{ type }}:
-  file.directory
+  file.directory:
+    - require:
+      - pkg: icinga2
+
 {% for apply, applyinfo in icinga2.conf[type].iteritems() %}
 {% set applyto = applyinfo["apply_to"]|default('') %}
 /etc/icinga2/conf.d/{{ type }}/{{ apply }}.conf:
