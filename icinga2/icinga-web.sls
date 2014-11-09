@@ -20,7 +20,9 @@ icinga2-web-required-packages:
 icinga-web:
   pkg.installed:
     - require:
+{% if grains['os'] == 'Ubuntu' %}
       - pkgrepo: formorer_icinga_web
+{% endif %}
       - pkg: icinga2-web-required-packages
       - pkg: icinga2-ido-pgsql
       - file: /etc/dbconfig-common/icinga-idoutils.conf
