@@ -1,5 +1,5 @@
 include:
-  - postgresql
+  - icinga2.postgresql
   - icinga2
 
 debconf_enable_pgsql_ido:
