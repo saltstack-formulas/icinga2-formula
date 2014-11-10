@@ -17,6 +17,11 @@ enable_perfdata:
   file.append:
     - text: RUN="yes"
 
+/etc/pnp4nagios/npcd.cfg:
+  file.replace:
+    - pattern: ^perfdata_spool_dir
+    - repl: perfdata_spool_dir = /var/spool/icinga2/perfdata
+
 npcd:
   service.running:
     - require:
