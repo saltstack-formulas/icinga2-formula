@@ -19,7 +19,7 @@ enable_perfdata:
 
 /etc/pnp4nagios/npcd.cfg:
   file.replace:
-    - pattern: ^perfdata_spool_dir
+    - pattern: ^perfdata_spool_dir.*
     - repl: perfdata_spool_dir = /var/spool/icinga2/perfdata
 
 npcd:
