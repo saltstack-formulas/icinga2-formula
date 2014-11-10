@@ -23,4 +23,16 @@ npcd:
 
 /etc/pnp4nagios/apache.conf:
   file.managed:
-    - source: salt://icinga2/files/apache.noauth.conf
+    - source: salt://icinga2/files/pnp4nagios.apache2.conf
+
+/etc/pnp4nagios/htpasswd.users:
+  file.managed:
+    - user: root
+    - group: www-data
+    - mode: 0640
+    - require:
+      - pkg: pnp4nagios_packages
+    - contents: |
+{%- for user, password_hash in icinga2.pnp4nagios.users.iteritems() %}
+        {{ user }}:{{ password_hash }}
+{%- endfor %}
