@@ -1,3 +1,4 @@
+{% from "icinga2/map.jinja" import icinga2 with context %}
 
 pnp4nagios_packages:
   pkg.installed:
