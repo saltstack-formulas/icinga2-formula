@@ -24,8 +24,9 @@ enable_perfdata:
 
 npcd:
   service.running:
-    - require:
+    - watch:
       - file: /etc/default/npcd
+      - file: /etc/pnp4nagios/npcd.cfg
 
 /etc/pnp4nagios/apache.conf:
   file.managed:
