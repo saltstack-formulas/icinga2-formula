@@ -10,8 +10,7 @@ nrpe_nagios_plugins:
       - pkgrepo: icinga_repo
 
 nagios-nrpe-server:
-  pkg:
-    - installed
+  pkg.installed:
     - require:
       - pkgrepo: icinga_repo
   service.running:
