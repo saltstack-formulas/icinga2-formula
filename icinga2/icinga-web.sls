@@ -1,5 +1,6 @@
 include:
   - .pgsql-ido
+  - .legacy-feature-activation
 
 {% if grains['os'] == 'Ubuntu' %}
 
@@ -31,3 +32,5 @@ icinga-web-config-icinga2-ido-pgsql:
   pkg.installed:
     - require:
       - pkg: icinga-web
+      - file: /usr/local/bin/icinga2-disable-feature
+      - file: /usr/local/bin/icinga2-enable-feature

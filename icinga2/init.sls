@@ -35,6 +35,9 @@ include:
           {{ key }} where {{ item }}
 {%- endfor %}
 
+{%- elif value is number %}
+          {{ key }} = {{ value }}
+
 {%- else %}
           {{ key }} = "{{ value }}"
 {%- endif %}
@@ -60,10 +63,16 @@ icinga2:
 
 ### Begin hosts configuration
 {% if icinga2.conf.hosts is defined %}
+
+/etc/icinga2/conf.d/hosts/:
+  file.directory
+
 {% for host, hostconf in icinga2.conf.hosts.iteritems() %}
 
 /etc/icinga2/conf.d/hosts/{{ host }}.conf:
   file.managed:
+    - require:
+      - file: /etc/icinga2/conf.d/hosts/
     - watch_in:
       - service: icinga2
     - contents: |
