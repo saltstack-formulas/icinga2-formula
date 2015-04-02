@@ -28,7 +28,7 @@ icinga2-ido-pgsql:
 
 enable_ido:
   cmd.run:
-    - name: icinga2-enable-feature ido-pgsql
+    - name: icinga2 feature enable ido-pgsql
     - require:
       - pkg: icinga2-ido-pgsql
     - watch_in:
