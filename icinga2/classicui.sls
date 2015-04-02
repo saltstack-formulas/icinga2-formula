@@ -24,7 +24,7 @@ icinga2-classicui:
         {{ user }}:{{ password_hash }}
 {%- endfor %}
 
-/etc/icinga2-fixclassicui/cgi.cfg:
+/etc/icinga2-classicui/cgi.cfg:
   file.managed:
     - source: salt://icinga2/files/classicui.cgi.cfg.tpl
     - template: jinja
