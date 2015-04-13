@@ -9,7 +9,7 @@ pnp4nagios_packages:
 
 enable_perfdata:
   cmd.run:
-    - name: icinga2 feature enableu perfdata
+    - name: icinga2 feature enable perfdata
     - watch_in:
       - service: icinga2
 
