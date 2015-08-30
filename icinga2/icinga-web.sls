@@ -13,10 +13,11 @@ formorer_icinga_web:
 {% endif %}
 
 icinga2-web-required-packages:
-  pkg.installed:
-    - pkgs:
-      - php5-fpm
-      - php5-pgsql
+    pkg.installed:
+        - pkgs:
+            - php5-fpm
+            - php5-pgsql
+            - libapache2-mod-php5
 
 icinga-web:
   pkg.installed:

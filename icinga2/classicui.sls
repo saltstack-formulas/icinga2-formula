@@ -3,14 +3,15 @@
 {% if grains['os_family'] in ['Debian']  %}
 
 include:
-  - icinga2
-  - .repositories
+    - icinga2
+    - .repositories
 
 icinga2-classicui:
-  pkg.installed:
-    - require:
-      - sls: icinga2
-      - pkgrepo: icinga_repo
+    pkg.installed:
+        - require:
+            - sls: icinga2
+            - pkgrepo: icinga_repo
+            - file: /etc/apache2/mods-enabled/version.load
 
 /etc/icinga2-classicui/htpasswd.users:
   file.managed:
@@ -30,3 +31,18 @@ icinga2-classicui:
     - template: jinja
 
 {% endif %}
+
+
+/etc/apache2/mods-enabled/version.load:
+  file.symlink:
+    - target: /etc/apache2/mods-available/version.load
+    - require:
+      - pkg: apache2 
+
+apache2:
+  pkg.installed: []
+  service.running:
+    - watch:
+      - file: /etc/apache2/mods-enabled/version.load
+    - require:
+      - pkg: apache2
