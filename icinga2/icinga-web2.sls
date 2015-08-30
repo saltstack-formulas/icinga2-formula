@@ -63,7 +63,7 @@ icinga2web-db-setup:
         - login: True
         - encrypted: False
         - require:
-            - pkg: install-postgresql
+            - pkg: icinga2-ido-pgsql
     postgres_database.present:
         - name: icinga2web
         - encoding: UTF-8
