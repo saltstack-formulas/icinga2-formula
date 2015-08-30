@@ -17,7 +17,11 @@ icinga_repo:
 
 icinga_repo:
   pkgrepo.managed:
-    - ppa: formorer/icinga
-
+    #- ppa: formorer/icinga
+    - humanname: icinga_official
+    - name: deb http://packages.icinga.org/ubuntu icinga-precise main
+    - key_url: http://packages.icinga.org/icinga.key
+#    - require:
+#      - pkg: debmon_repo_required_packages
 
 {% endif %}
