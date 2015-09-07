@@ -79,7 +79,7 @@ icinga2web-enable-graphite:
         - user: root
         - group: root
         - mode: 644
-        - wtach_in:
+        - watch_in:
             - service: icinga2
 
 #Enable status data module of icinga2web
@@ -91,7 +91,7 @@ icinga2web-enable-statusdata:
         - user: root
         - group: root
         - mode: 644
-        - wtach_in:
+        - watch_in:
             - service: icinga2
 
 #Enable perfdata module of icinga2web
@@ -103,7 +103,7 @@ icinga2web-enable-perfdata:
         - user: root
         - group: root
         - mode: 644
-        - wtach_in:
+        - watch_in:
             - service: icinga2
 
 #Enable gelf module of icinga2web
@@ -115,7 +115,7 @@ icinga2web-enable-gelf:
         - user: root
         - group: root
         - mode: 644
-        - wtach_in:
+        - watch_in:
             - service: icinga2
 
 #Enable icingastatus module of icinga2web
@@ -127,7 +127,7 @@ icinga2web-enable-icingastatus:
         - user: root
         - group: root
         - mode: 644
-        - wtach_in:
+        - watch_in:
             - service: icinga2
 
 #Enable opentsdb module of icinga2web
@@ -139,7 +139,7 @@ icinga2web-enable-opentsdb:
         - user: root
         - group: root
         - mode: 644
-        - wtach_in:
+        - watch_in:
             - service: icinga2
 
 #Enable command module of icinga2web
