@@ -21,7 +21,7 @@ icinga2-classicui:
     - require:
       - pkg: icinga2-classicui
     - contents: |
-{%- for user, password_hash in icinga2.classicui.users.iteritems() %}
+{%- for user, password_hash in icinga2.classicui.users.items() %}
         {{ user }}:{{ password_hash }}
 {%- endfor %}
 
@@ -37,7 +37,7 @@ icinga2-classicui:
   file.symlink:
     - target: /etc/apache2/mods-available/version.load
     - require:
-      - pkg: apache2 
+      - pkg: apache2
 
 apache2:
   pkg.installed: []
