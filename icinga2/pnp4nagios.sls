@@ -40,6 +40,6 @@ npcd:
     - require:
       - pkg: pnp4nagios_packages
     - contents: |
-{%- for user, password_hash in icinga2.pnp4nagios.users.iteritems() %}
+{%- for user, password_hash in icinga2.pnp4nagios.users.items() %}
         {{ user }}:{{ password_hash }}
 {%- endfor %}
