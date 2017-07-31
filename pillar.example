@@ -1,6 +1,8 @@
 icinga2:
   lookup:
+    service: icinga2
     pkgs:
+      - icinga2
       - nagios-nrpe-plugin
     nrpe:
       config:
