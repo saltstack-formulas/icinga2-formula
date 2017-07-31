@@ -10,23 +10,52 @@ services only.
 
 Suggestions, pull-requests, bug reports and comments are welcome.
 
+
 Available states
 ================
 
 .. contents::
     :local:
 
+
 ``icinga2``
 -----------
 
 Installs and configures the icinga2 package.
+Includes ``icinga.repositories``.
+
 
 ``icinga2.classicui``
 ---------------------
 
-Installs and configures the icinga2 package and configures the classicui.
+Includes ``icinga2`` and configures the classicui.
+
 
 ``icinga2.nrpe-server``
 -----------------------
 
 Installs and configures the nrpe-server to perform checks on non-local hosts.
+
+
+``icinga2.pnp4nagios``
+-----------------------
+
+Installs and configures PNP4Nagios.
+
+
+``icinga2.repositories``
+-----------------------
+
+Adds the Debian / Ubuntu repository to get Icinga2 packages from.
+
+
+``icinga2.icinga-web``
+-----------------------
+
+Installs the (old) Icinga Web UI.
+
+
+``icinga2.icinga-web2``
+-----------------------
+
+Installs the (new) Icinga Web UI.
