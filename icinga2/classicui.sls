@@ -11,7 +11,9 @@ icinga2-classicui:
         - require:
             - sls: icinga2
             - pkgrepo: icinga_repo
+            {% if grains['osrelease'] < 8 %}
             - file: /etc/apache2/mods-enabled/version.load
+            {% endif %}
 
 /etc/icinga2-classicui/htpasswd.users:
   file.managed:
@@ -32,6 +34,7 @@ icinga2-classicui:
 
 {% endif %}
 
+{% if grains['os_family'] not in ['Debian'] or grains['osrelease'] < 8 %}
 
 /etc/apache2/mods-enabled/version.load:
   file.symlink:
@@ -46,3 +49,5 @@ apache2:
       - file: /etc/apache2/mods-enabled/version.load
     - require:
       - pkg: apache2
+
+{% endif %}
