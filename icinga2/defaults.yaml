@@ -6,3 +6,12 @@ icinga2:
   pkgs:
     - icinga2
   service: icinga2
+  web2:
+    pkgs:
+      - php-fpm
+      - php-pgsql
+      - libapache2-mod-php
+      - php-intl
+      - php-gd
+      - php-imagick
+
