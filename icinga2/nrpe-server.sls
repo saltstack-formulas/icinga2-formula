@@ -1,4 +1,6 @@
-{% from "icinga2/map.jinja" import icinga2 with context %}
+{# keep backwards compatibility #}
+{% set nrpe = salt['pillar.get']('nrpe', salt['pillar.get']('icinga2:lookup::nrpe', {}))%}
+
 
 include:
   - .repositories
@@ -21,18 +23,16 @@ nagios-nrpe-server:
 /etc/default/nagios-nrpe-server:
   file.managed:
     - contents: |
-{%- for key, value in icinga2.nrpe.defaults.items() %}
+{%- for key, value in nrpe.get('defaults', {}).items() %}
         {{ key }}={{ value }}
 {%- endfor %}
 
 /etc/nagios/nrpe_local.cfg:
   file.managed:
     - contents: |
-{%- for key, value in icinga2.nrpe.config.items() if not value is mapping %}
+{%- for key, value in nrpe.get('config', {}).items() if not value is mapping %}
         {{ key }}={{ value }}
 {%- endfor %}
-{% if icinga2.nrpe.config.commands is defined %}
-{%- for key, value in icinga2.nrpe.config.commands.items() %}
+{%- for key, value in nrpe.get('config:commands', {}).items() %}
         command[{{ key }}] = {{ value }}
 {%- endfor %}
-{% endif %}

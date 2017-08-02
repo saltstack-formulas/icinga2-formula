@@ -1,4 +1,5 @@
 {% from "icinga2/map.jinja" import icinga2 with context %}
+{% set conf = salt['pillar.get']('icinga2:conf', {}) %}
 
 {%- macro printconfig(type, object, name, config, applyto="") %}
         {{ type }} {{ object }} "{{ name }}" {% if applyto !="" %}to {% endif %}{{ applyto }}{% if applyto !="" %} {% endif %}{
@@ -45,32 +46,32 @@
 {%- if grains['os_family'] in ['Debian']  %}
 
 ### Begin hosts configuration
-{%-   if icinga2.conf.hosts is defined %}
+{%-   if conf.hosts is defined %}
 
-/etc/icinga2/conf.d/hosts/:
+/etc/conf.d/hosts/:
   file.directory
 
-{%-     for host, hostconf in icinga2.conf.hosts.items() %}
+{%-     for host, hostconf in conf.hosts.items() %}
 
-/etc/icinga2/conf.d/hosts/{{ host }}.conf:
+/etc/conf.d/hosts/{{ host }}.conf:
   file.managed:
     - require:
-      - file: /etc/icinga2/conf.d/hosts/
+      - file: /etc/conf.d/hosts/
     - watch_in:
       - service: icinga2
     - contents: |
 {{ printconfig("object", "Host", host, hostconf) }}
 
 {%-       if hostconf.services is defined %}
-/etc/icinga2/conf.d/hosts/{{ host }}:
+/etc/conf.d/hosts/{{ host }}:
   file.directory
 
 {%-         for service, serviceconf in hostconf.services.items() %}
 
-/etc/icinga2/conf.d/hosts/{{ host }}/{{ service }}.conf:
+/etc/conf.d/hosts/{{ host }}/{{ service }}.conf:
   file.managed:
     - require:
-      - file: /etc/icinga2/conf.d/hosts/{{ host }}
+      - file: /etc/conf.d/hosts/{{ host }}
     - watch_in:
       - service: icinga2
     - contents: |
@@ -84,13 +85,13 @@
 
 ### Begin hostgroups configuration
 
-{%-   if icinga2.conf.hostgroups is defined %}
-/etc/icinga2/conf.d/hostsgroups.conf:
+{%-   if conf.hostgroups is defined %}
+/etc/conf.d/hostsgroups.conf:
   file.managed:
     - watch_in:
       - service: icinga2
     - contents: |
-{%-     for hostgroup, hostgroupconf in icinga2.conf.hostgroups.items() %}
+{%-     for hostgroup, hostgroupconf in conf.hostgroups.items() %}
 {{ printconfig("object", "HostGroup", hostgroup, hostgroupconf) }}
 
 {%-     endfor %}
@@ -98,17 +99,17 @@
 ### End hostgroups configuration
 
 ### Begin template configuration
-{%-   if icinga2.conf.templates is defined %}
-/etc/icinga2/conf.d/templates:
+{%-   if conf.templates is defined %}
+/etc/conf.d/templates:
   file.directory:
     - require:
       - pkg: icinga2
 
-{%-     for template, templateinfo in icinga2.conf.templates.items() %}
-/etc/icinga2/conf.d/templates/{{ template }}.conf:
+{%-     for template, templateinfo in conf.templates.items() %}
+/etc/conf.d/templates/{{ template }}.conf:
   file.managed:
     - require:
-      - file: /etc/icinga2/conf.d/templates
+      - file: /etc/conf.d/templates
     - watch_in:
       - service: icinga2
     - contents: |
@@ -122,18 +123,18 @@
 {% set applies = { "downtimes": "ScheduledDowntime", "services": "Service", "notifications": "Notification"} %}
 {%-   for type, objecttype in applies.items() %}
 
-{%-     if icinga2.conf[type] is defined %}
-/etc/icinga2/conf.d/{{ type }}:
+{%-     if conf[type] is defined %}
+/etc/conf.d/{{ type }}:
   file.directory:
     - require:
       - pkg: icinga2
 
-{%-       for apply, applyinfo in icinga2.conf[type].items() %}
+{%-       for apply, applyinfo in conf[type].items() %}
 {% set applyto = applyinfo["apply_to"]|default('') %}
-/etc/icinga2/conf.d/{{ type }}/{{ apply }}.conf:
+/etc/conf.d/{{ type }}/{{ apply }}.conf:
   file.managed:
     - require:
-      - file: /etc/icinga2/conf.d/{{ type }}
+      - file: /etc/conf.d/{{ type }}
     - watch_in:
       - service: icinga2
     - contents: |

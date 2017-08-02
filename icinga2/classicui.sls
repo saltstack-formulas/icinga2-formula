@@ -1,4 +1,5 @@
-{% from "icinga2/map.jinja" import icinga2 with context %}
+{# keep backwards compatibility #}
+{% set classicui = salt['pillar.get']('icinga2:classicui', salt['pillar.get']('icinga2:lookup::classicui', {}))%}
 
 {% if grains['os_family'] in ['Debian']  %}
 
@@ -22,7 +23,7 @@ icinga2-classicui:
     - require:
       - pkg: icinga2-classicui
     - contents: |
-{%- for user, password_hash in icinga2.classicui.users.items() %}
+{%- for user, password_hash in classicui.users.items() %}
         {{ user }}:{{ password_hash }}
 {%- endfor %}
 
