@@ -1,5 +1,4 @@
 include:
-  - icinga2.postgresql
   - icinga2
 
 debconf_enable_pgsql_ido:
@@ -22,7 +21,6 @@ icinga2-ido-pgsql:
       - cmd: debconf_dbconfig_pgsql_ido
       - cmd: debconf_dbconfig_pgsql_dbname
       - pkg: icinga2_pkgs
-      - pkg: postgresql_packages_for_icinga_ido
     - watch_in:
       - service: icinga2
 

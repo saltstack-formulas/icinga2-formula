@@ -31,26 +31,8 @@ Includes ``icinga.repositories``.
 Includes ``icinga2`` and configures the classicui.
 
 
-``icinga2.nrpe-server``
------------------------
-
-Installs and configures the nrpe-server to perform checks on non-local hosts.
-
-
-``icinga2.pnp4nagios``
------------------------
-
-Installs and configures PNP4Nagios.
-
-
-``icinga2.repositories``
------------------------
-
-Adds the Debian / Ubuntu repository to get Icinga2 packages from.
-
-
 ``icinga2.icinga-web``
------------------------
+----------------------
 
 Installs the (old) Icinga Web UI.
 
@@ -58,4 +40,53 @@ Installs the (old) Icinga Web UI.
 ``icinga2.icinga-web2``
 -----------------------
 
+Includes:
+
+- ``icinga2.icinga-web2-core``
+- ``icinga2.pgsql-ido``
+- ``icinga2.postgresql``
+- ``icinga2.legacy-feature-activation``
+
+
+``icinga2.nrpe-server``
+-----------------------
+
+Installs and configures the nrpe-server to perform checks on non-local hosts.
+
+
+``icinga2.pnp4nagios``
+----------------------
+
+Installs and configures PNP4Nagios.
+
+
+States which are independent building blocks
+============================================
+
+
+``icinga2.icinga-web2-core``
+-----------------------
+
 Installs the (new) Icinga Web UI.
+
+
+``icinga2.pgsql-ido``
+---------------------
+
+Installs and configures ``icinga2-ido-pgsql``.
+You may want to add ``icinga2.postgresql``
+
+
+``icinga2.postgresql``
+----------------------
+
+Installs PostgreSQL server and client.
+
+
+``icinga2.repositories``
+------------------------
+
+Adds the Debian / Ubuntu repository to get Icinga2 packages from if (and only if)
+the machine happens to run one of the mentioned operating systems.
+
+
