@@ -1,3 +1,5 @@
+{% from "icinga2/map.jinja" import feature with context %}
+
 include:
   - icinga2
 
@@ -17,14 +19,9 @@ icinga2-ido-pgsql:
     - watch_in:
       - service: icinga2
 
-enable_ido:
-  cmd.run:
-    - name: icinga2 feature enable ido-pgsql
-    - unless: "icinga2 feature list | grep '^Enabled features: .*ido-pgsql'"
+{{ feature('ido-pgsql', True) }}
     - require:
       - pkg: icinga2-ido-pgsql
-    - watch_in:
-      - service: icinga2
 
 /etc/dbconfig-common/icinga-idoutils.conf:
   file.symlink:
