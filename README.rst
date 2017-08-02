@@ -40,7 +40,6 @@ Includes:
 
 - ``icinga2.pgsql-ido``
 - ``icinga2.postgresql``
-- ``icinga2.legacy-feature-activation``
 
 
 ``icinga2.icinga-web2``
@@ -52,7 +51,6 @@ Includes:
 - ``icinga2.icinga-web2-database``
 - ``icinga2.pgsql-ido``
 - ``icinga2.postgresql``
-- ``icinga2.legacy-feature-activation``
 - ``icinga2.vagrant``
 - ``icinga2.iptables``
 
