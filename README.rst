@@ -47,6 +47,7 @@ Includes:
 - ``icinga2.postgresql``
 - ``icinga2.legacy-feature-activation``
 - ``icinga2.vagrant``
+- ``icinga2.iptables``
 
 
 ``icinga2.nrpe-server``
@@ -67,14 +68,20 @@ Installs and configures PNP4Nagios.
 Installs and configures Apache2 and populates the DB in the presence of a vagrant user.
 
 
-States which are independent building blocks
-============================================
+States which are independent (reusable) building blocks
+=======================================================
 
 
 ``icinga2.icinga-web2-core``
 -----------------------
 
 Installs the (new) Icinga Web UI.
+
+
+``icinga2.iptables``
+----------------------
+
+Accepts connections on port 80/tcp.
 
 
 ``icinga2.pgsql-ido``
@@ -95,5 +102,3 @@ Installs PostgreSQL server and client.
 
 Adds the Debian / Ubuntu repository to get Icinga2 packages from if (and only if)
 the machine happens to run one of the mentioned operating systems.
-
-
