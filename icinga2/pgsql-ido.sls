@@ -1,25 +1,18 @@
 include:
   - icinga2
 
-debconf_enable_pgsql_ido:
-  cmd.run:
-    - name: "echo debconf icinga2-ido-pgsql/dbconfig-install boolean true | sudo debconf-set-selections"
-
-debconf_dbconfig_pgsql_ido:
-  cmd.run:
-    - name: "echo debconf icinga2-ido-pgsql/enable boolean true | sudo debconf-set-selections"
-
-debconf_dbconfig_pgsql_dbname:
-  cmd.run:
-    - name: "echo debconf icinga2-ido-pgsql/db/dbname string icinga | sudo debconf-set-selections"
-
+debconf_pgsql_ido:
+  debconf.set:
+    - name: icinga2-ido-pgsql
+    - data:
+        'icinga2-ido-pgsql/dbconfig-install': {'type': 'boolean', 'value': true}
+        'icinga2-ido-pgsql/db/dbname': {'type': 'string', 'value': 'icinga'}
+        'icinga2-ido-pgsql/enable': {'type': 'boolean', 'value': true}
 
 icinga2-ido-pgsql:
   pkg.installed:
     - require:
-      - cmd: debconf_enable_pgsql_ido
-      - cmd: debconf_dbconfig_pgsql_ido
-      - cmd: debconf_dbconfig_pgsql_dbname
+      - debconf: debconf_pgsql_ido
       - pkg: icinga2_pkgs
     - watch_in:
       - service: icinga2
@@ -27,6 +20,7 @@ icinga2-ido-pgsql:
 enable_ido:
   cmd.run:
     - name: icinga2 feature enable ido-pgsql
+    - unless: "icinga2 feature list | grep '^Enabled features: .*ido-pgsql'"
     - require:
       - pkg: icinga2-ido-pgsql
     - watch_in:
