@@ -3,17 +3,17 @@
 {% if grains['os_family'] in ['Debian']  %}
 
 include:
-    - icinga2
-    - .repositories
+  - icinga2
+  - .repositories
 
 icinga2-classicui:
-    pkg.installed:
-        - require:
-            - sls: icinga2
-            - pkgrepo: icinga_repo
-            {% if grains['osrelease'] < 8 %}
-            - file: /etc/apache2/mods-enabled/version.load
-            {% endif %}
+  pkg.installed:
+    - require:
+      - sls: icinga2
+      - pkgrepo: icinga_repo
+{% if grains['osrelease'] < 8 %}
+      - file: /etc/apache2/mods-enabled/version.load
+{% endif %}
 
 /etc/icinga2-classicui/htpasswd.users:
   file.managed:
