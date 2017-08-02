@@ -43,6 +43,7 @@ Installs the (old) Icinga Web UI.
 Includes:
 
 - ``icinga2.icinga-web2-core``
+- ``icinga2.icinga-web2-database``
 - ``icinga2.pgsql-ido``
 - ``icinga2.postgresql``
 - ``icinga2.legacy-feature-activation``
@@ -70,6 +71,13 @@ Installs and configures Apache2 and populates the DB in the presence of a vagran
 
 States which are independent (reusable) building blocks
 =======================================================
+
+
+``icinga2.icinga-web2-database``
+-----------------------
+
+Creates the DB user and the DB itself.
+(Makes only sense if the DB shall run on the same host as Icinga2)
 
 
 ``icinga2.icinga-web2-core``
