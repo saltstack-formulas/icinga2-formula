@@ -1,8 +1,4 @@
 icinga2:
-  classicui:
-    users: {}
-  conf: {}
-  nrpe: {}
   pkgs:
     - icinga2
   service: icinga2
