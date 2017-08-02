@@ -36,6 +36,12 @@ Includes ``icinga2`` and configures the classicui.
 
 Installs the (old) Icinga Web UI.
 
+Includes:
+
+- ``icinga2.pgsql-ido``
+- ``icinga2.postgresql``
+- ``icinga2.legacy-feature-activation``
+
 
 ``icinga2.icinga-web2``
 -----------------------

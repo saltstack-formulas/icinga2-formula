@@ -1,5 +1,7 @@
 include:
+  - icinga2
   - .pgsql-ido
+  - .postgresql
   - .legacy-feature-activation
 
 {% if grains['os'] == 'Ubuntu' %}
@@ -8,7 +10,7 @@ formorer_icinga_web:
   pkgrepo.managed:
     - ppa: formorer/icinga-web
     - require_in:
-      - pkg: icinga2
+      - pkg: icinga2_pkgs
 
 {% endif %}
 
@@ -33,5 +35,3 @@ icinga-web-config-icinga2-ido-pgsql:
   pkg.installed:
     - require:
       - pkg: icinga-web
-      - file: /usr/local/bin/icinga2-disable-feature
-      - file: /usr/local/bin/icinga2-enable-feature
