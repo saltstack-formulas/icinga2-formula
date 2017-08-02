@@ -15,3 +15,14 @@
     ),
     base='icinga2')
 %}
+
+{%- macro feature(name, enable) %}
+{%-   set action = 'enable' if enable else 'disable' %}
+{%-   set category = 'Enabled' if enable else 'Disabled' %}
+"icinga2_feature_{{ name }}":
+  cmd.run:
+    - name: icinga2 feature {{ action }} {{ name }}
+    - unless: "icinga2 feature list | grep '^{{ category }} features:.* {{ name }}\\( \\|$\\)'"
+    - watch_in:
+      - service: icinga2
+{%- endmacro %}
