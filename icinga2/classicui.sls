@@ -9,7 +9,6 @@ include:
 icinga2-classicui:
   pkg.installed:
     - require:
-      - sls: icinga2
       - pkgrepo: icinga_repo
 {% if grains['osrelease'] < 8 %}
       - file: /etc/apache2/mods-enabled/version.load
@@ -31,6 +30,7 @@ icinga2-classicui:
   file.managed:
     - source: salt://icinga2/files/classicui.cgi.cfg.tpl
     - template: jinja
+    - makedirs: True
 
 {% endif %}
 
