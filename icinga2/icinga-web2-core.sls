@@ -2,21 +2,17 @@
 
 icinga2-web2-required-packages:
   pkg.installed:
-    - pkgs: {{ icinga2.icinga_web2.pkgs }}
+    - pkgs: {{ icinga2.icinga_web2.required_pkgs }}
 
 icinga2-web2:
   pkg.installed:
+    - pkgs: {{ icinga2.icinga_web2.pkgs }}
     - require:
       - pkg: icinga2-web2-required-packages
       - pkg: icinga2-ido-pgsql
       - file: /etc/dbconfig-common/icinga-idoutils.conf
       - file: /usr/local/bin/icinga2-disable-feature
       - file: /usr/local/bin/icinga2-enable-feature
-    - pkgs:
-      - icingaweb2
-      - icingaweb2-module-doc
-      - icingaweb2-module-monitoring
-      - icingaweb2-module-setup
   iptables.append:
     - table: filter
     - chain: INPUT

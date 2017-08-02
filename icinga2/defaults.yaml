@@ -8,6 +8,10 @@ icinga2:
   service: icinga2
   icinga_web2:
     pkgs:
+      - icingaweb2
+      - icingaweb2-module-doc
+      - icingaweb2-module-monitoring
+    required_pkgs:
       - php-fpm
       - php-pgsql
       - libapache2-mod-php
