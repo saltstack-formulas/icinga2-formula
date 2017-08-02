@@ -1,5 +1,8 @@
-{% from "icinga2/map.jinja" import icinga2 with context %}
+{% from "icinga2/map.jinja" import feature with context %}
 
+include:
+  - icinga2
+  
 pnp4nagios_packages:
   pkg.installed:
     - pkgs:
@@ -7,11 +10,7 @@ pnp4nagios_packages:
       - pnp4nagios-web
     - install_recommends: False
 
-enable_perfdata:
-  cmd.run:
-    - name: icinga2 feature enable perfdata
-    - watch_in:
-      - service: icinga2
+{{ feature('perfdata', True) }}
 
 /etc/default/npcd:
   file.append:
@@ -40,6 +39,6 @@ npcd:
     - require:
       - pkg: pnp4nagios_packages
     - contents: |
-{%- for user, password_hash in icinga2.pnp4nagios.users.items() %}
+{%- for user, password_hash in salt['pillar.get']('icinga2:pnp4nagios:users', {}).items() %}
         {{ user }}:{{ password_hash }}
 {%- endfor %}
