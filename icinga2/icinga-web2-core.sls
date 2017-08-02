@@ -10,16 +10,6 @@ icinga2-web2-required-packages:
 icinga2-web2:
   pkg.installed:
     - pkgs: {{ icinga2.icinga_web2.pkgs }}
-  iptables.append:
-    - table: filter
-    - chain: INPUT
-    - jump: ACCEPT
-    - match: state
-    - connstate: NEW
-    - dport: 80
-    - proto: tcp
-    - sport: 1025:65535
-    - save: True
 
 #Create an empty database which will be populated later
 icinga2web-db-setup:
