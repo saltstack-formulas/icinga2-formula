@@ -9,7 +9,6 @@ icinga2-web2:
     - require:
       - pkg: icinga2-web2-required-packages
       - pkg: icinga2-ido-pgsql
-      - cmd: phpini-conf
       - file: /etc/dbconfig-common/icinga-idoutils.conf
       - file: /usr/local/bin/icinga2-disable-feature
       - file: /usr/local/bin/icinga2-enable-feature
@@ -29,20 +28,6 @@ icinga2-web2:
     - sport: 1025:65535
     - save: True
 
-#Configures the timezone for the 
-phpini-conf:
-  cmd.run:
-    - name: "sudo sed -i.bak \"s/;date.timezone\\\ .*/date.timezone\ =\ \\\"Europe\\/Vienna\\\"/\" /etc/php5/apache2/php.ini"
-    - user: vagrant
-    - output_loglevel: DEBUG
-  service.running:
-    - name: apache2
-    - restart: True
-    - enable: True
-    - watch:
-      - pkg: icinga2-web2-required-packages
-#      - file: /etc/php5/apache2/php.ini
-
 #Create an empty database which will be populated later
 icinga2web-db-setup:
   postgres_user.present:
@@ -61,6 +46,8 @@ icinga2web-db-setup:
     - encoding: UTF-8
     - template: template0
     - owner: icinga2web
+    - require:
+      - postgres_user: icinga2web-db-setup
 
 #Enable graphite module of icinga2web
 icinga2web-enable-graphite:
@@ -164,17 +151,3 @@ icinga2web-autoconfigure-finalize:
     - makedirs: True
     - user: www-data
     - group:  icingaweb2
-
-icinga2web-dbpopulate:
-  file.recurse:
-    - name: /tmp/icingaschema
-    - source: salt://icinga2/files/pgsql
-    - makedirs: True
-    - dir_mode: 777
-    - file_mode: 777
-  cmd.script:
-    - name: salt://icinga2/files/setup_icinga2web.sh
-    - user: vagrant
-    - output_loglevel: DEBUG
-
-

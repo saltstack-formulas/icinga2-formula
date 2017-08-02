@@ -46,6 +46,7 @@ Includes:
 - ``icinga2.pgsql-ido``
 - ``icinga2.postgresql``
 - ``icinga2.legacy-feature-activation``
+- ``icinga2.vagrant``
 
 
 ``icinga2.nrpe-server``
@@ -58,6 +59,12 @@ Installs and configures the nrpe-server to perform checks on non-local hosts.
 ----------------------
 
 Installs and configures PNP4Nagios.
+
+
+``icinga2.vagrant``
+-------------------
+
+Installs and configures Apache2 and populates the DB in the presence of a vagrant user.
 
 
 States which are independent building blocks
