@@ -1,5 +1,8 @@
 {% from "icinga2/map.jinja" import icinga2 with context %}
 
+include:
+  - icinga2
+
 icinga2-web2-required-packages:
   pkg.installed:
     - pkgs: {{ icinga2.icinga_web2.required_pkgs }}
@@ -7,12 +10,6 @@ icinga2-web2-required-packages:
 icinga2-web2:
   pkg.installed:
     - pkgs: {{ icinga2.icinga_web2.pkgs }}
-    - require:
-      - pkg: icinga2-web2-required-packages
-      - pkg: icinga2-ido-pgsql
-      - file: /etc/dbconfig-common/icinga-idoutils.conf
-      - file: /usr/local/bin/icinga2-disable-feature
-      - file: /usr/local/bin/icinga2-enable-feature
   iptables.append:
     - table: filter
     - chain: INPUT
@@ -36,7 +33,7 @@ icinga2web-db-setup:
     - login: True
     - encrypted: False
     - require:
-      - pkg: icinga2-ido-pgsql
+      - pkg: icinga2-web2
   postgres_database.present:
     - name: icinga2web
     - encoding: UTF-8
