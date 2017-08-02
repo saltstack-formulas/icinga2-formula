@@ -26,7 +26,7 @@ icinga2web-db-setup:
       - pkg: icinga2-web2
   postgres_database.present:
     - name: icinga2web
-    - encoding: UTF-8
+    - encoding: UTF8
     - template: template0
     - owner: icinga2web
     - require:
