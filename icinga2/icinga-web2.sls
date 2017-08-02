@@ -2,15 +2,11 @@ include:
   - .pgsql-ido
   - .legacy-feature-activation
 
+{% from "icinga2/map.jinja" import icinga2 with context %}
+
 icinga2-web2-required-packages:
   pkg.installed:
-    - pkgs:
-      - php5-fpm
-      - php5-pgsql
-      - libapache2-mod-php5
-      - php5-intl
-      - php5-gd
-      - php5-imagick
+    - pkgs: {{ icinga2.web2.pkgs }}
 
 icinga2-web2:
   pkg.installed:
