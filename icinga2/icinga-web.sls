@@ -2,7 +2,6 @@ include:
   - icinga2
   - .pgsql-ido
   - .postgresql
-  - .legacy-feature-activation
 
 {% if grains['os'] == 'Ubuntu' %}
 
