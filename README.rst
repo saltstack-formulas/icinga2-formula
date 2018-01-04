@@ -76,6 +76,9 @@ Installs and configures Apache2 and populates the DB in the presence of a vagran
 States which are independent (reusable) building blocks
 =======================================================
 
+.. contents::
+    :local:
+
 
 ``icinga2.icinga-web2-database``
 -----------------------
