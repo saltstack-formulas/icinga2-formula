@@ -25,23 +25,6 @@ Installs and configures the icinga2 package.
 Includes ``icinga.repositories``.
 
 
-``icinga2.classicui``
----------------------
-
-Includes ``icinga2`` and configures the classicui.
-
-
-``icinga2.icinga-web``
-----------------------
-
-Installs the (old) Icinga Web UI.
-
-Includes:
-
-- ``icinga2.pgsql-ido``
-- ``icinga2.postgresql``
-
-
 ``icinga2.icinga-web2``
 -----------------------
 
@@ -51,26 +34,12 @@ Includes:
 - ``icinga2.icinga-web2-database``
 - ``icinga2.pgsql-ido``
 - ``icinga2.postgresql``
-- ``icinga2.vagrant``
-- ``icinga2.iptables``
 
 
-``icinga2.nrpe-server``
------------------------
+``icinga2.nrpe-server`` (DEPRECATED)
+------------------------------------
 
 Installs and configures the nrpe-server to perform checks on non-local hosts.
-
-
-``icinga2.pnp4nagios``
-----------------------
-
-Installs and configures PNP4Nagios.
-
-
-``icinga2.vagrant``
--------------------
-
-Installs and configures Apache2 and populates the DB in the presence of a vagrant user.
 
 
 States which are independent (reusable) building blocks
@@ -91,12 +60,6 @@ Creates the DB user and the DB itself.
 -----------------------
 
 Installs the (new) Icinga Web UI.
-
-
-``icinga2.iptables``
-----------------------
-
-Accepts connections on port 80/tcp.
 
 
 ``icinga2.pgsql-ido``
