@@ -33,7 +33,8 @@ Includes:
 - ``icinga2.icinga-web2-core``
 - ``icinga2.icinga-web2-database``
 - ``icinga2.pgsql-ido``
-- ``icinga2.postgresql``
+- ``icinga2.postgresql-client``
+- ``icinga2.postgresql-server``
 
 
 ``icinga2.nrpe-server`` (DEPRECATED)
@@ -66,13 +67,19 @@ Installs the (new) Icinga Web UI.
 ---------------------
 
 Installs and configures ``icinga2-ido-pgsql``.
-You may want to add ``icinga2.postgresql``
+You may want to add ``icinga2.postgresql-client``
 
 
-``icinga2.postgresql``
+``icinga2.postgresql-client``
 ----------------------
 
-Installs PostgreSQL server and client.
+Installs PostgreSQL client.
+
+
+``icinga2.postgresql-server``
+----------------------
+
+Installs PostgreSQL server.
 
 
 ``icinga2.repositories``

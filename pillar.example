@@ -19,6 +19,9 @@ icinga2:
         statusdata: True
         # ...
 
+  postgres:
+    use_formula: False  # set to True if you are using postgres-formula
+
   nrpe:  # deprecated
     config:
       server_port: 5666

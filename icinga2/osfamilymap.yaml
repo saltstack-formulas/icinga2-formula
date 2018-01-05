@@ -1,2 +1,4 @@
 Debian: {}
 Ubuntu: {}
+FreeBSD:
+  configure_repositories: False

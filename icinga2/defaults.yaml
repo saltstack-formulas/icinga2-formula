@@ -1,12 +1,17 @@
 icinga2:
   pkgs:
     - icinga2
+  postgresql_pkgs:
+    - postgresql-client
   service: icinga2
+  configure_repositories: True
   icinga_web2:
     pkgs:
       - icingaweb2
       - icingaweb2-module-doc
       - icingaweb2-module-monitoring
+    postgresql_pkgs:
+      - postgresql
     required_pkgs:
       - php-fpm
       - php-pgsql
