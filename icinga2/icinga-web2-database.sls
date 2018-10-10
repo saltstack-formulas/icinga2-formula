@@ -8,7 +8,8 @@ icinga2web-db-setup:
     - createuser: True
     - inherit: True
     - login: True
-    - encrypted: False
+    # Necessary as of PostgreSQL 10
+    - encrypted: True
     - require:
       - pkg: icinga2-web2
   postgres_database.present:
