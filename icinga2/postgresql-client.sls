@@ -8,11 +8,11 @@ extend:
   postgresql-client-libs:
     pkg:
     - require_in:
-      - pkg: icinga2-ido-pgsql
+      - pkg: icinga2ido-pkg
 {% else %}
 postgresql_packages_for_icinga_ido:
   pkg.installed:
     - pkgs: {{ icinga2.postgresql_pkgs }}
     - require_in:
-      - pkg: icinga2-ido-pgsql
+      - pkg: icinga2ido-pkg
 {% endif %}
