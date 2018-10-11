@@ -20,7 +20,7 @@ icinga2-web2:
 icinga2web-autoconfigure:
   file.recurse:
     - name: "{{ icinga2.icinga_web2.config_dir }}"
-    - source: salt://icinga2/files/etc/
+    - source: salt://icinga2/files/etc.icingaweb2/
     - template: jinja
     - makedirs: True
     - user: www-data
