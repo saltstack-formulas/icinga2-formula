@@ -21,6 +21,7 @@ icinga2web-autoconfigure:
   file.recurse:
     - name: /etc/icingaweb2
     - source: salt://icinga2/files/etc/
+    - template: jinja
     - makedirs: True
     - user: www-data
     - group: icingaweb2

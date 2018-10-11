@@ -4,7 +4,14 @@ icinga2:
     pkgs:
       - icinga2
       #- nagios-nrpe-plugin
+    ido:
+      db:
+        # MUST BE SET when using icinga2.pgsql-ido
+        password: SomeSecurePassword
     icinga_web2:
+      db:
+        # MUST BE SET when using icinga2.icinga-web2-database
+        password: AnotherSecurePassword
       pkgs:
         - ...
       required_pkgs:
