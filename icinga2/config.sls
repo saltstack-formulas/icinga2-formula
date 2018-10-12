@@ -53,7 +53,19 @@
 
 {%-     for host, hostconf in conf.hosts.items() %}
 
-{{ icinga2.config_dir }}/conf.d/hosts/{{ host }}.conf:
+{%-       set path = "{}/conf.d/hosts/{}".format(icinga2.config_dir, host) %}
+
+{%-       if hostconf['remove'] is sameas true %}
+{{ path }}.conf:
+  file.absent:
+    - watch_in:
+      - service: icinga2
+{{ path }}/:
+  file.absent:
+    - watch_in:
+      - service: icinga2
+{%-       else %}
+{{ path }}.conf:
   file.managed:
     - require:
       - file: {{ icinga2.config_dir }}/conf.d/hosts/
@@ -62,13 +74,13 @@
     - contents: |
 {{ printconfig("object", "Host", host, hostconf) }}
 
-{%-       if hostconf.services is defined %}
-{{ icinga2.config_dir }}/conf.d/hosts/{{ host }}:
+{%-         if hostconf.services is defined %}
+{{ path}}:
   file.directory
 
-{%-         for service, serviceconf in hostconf.services.items() %}
+{%-           for service, serviceconf in hostconf.services.items() %}
 
-{{ icinga2.config_dir }}/conf.d/hosts/{{ host }}/{{ service }}.conf:
+{{ path }}/{{ service }}.conf:
   file.managed:
     - require:
       - file: {{ icinga2.config_dir }}/conf.d/hosts/{{ host }}
@@ -77,7 +89,8 @@
     - contents: |
 {{ printconfig("object", "Service", service, serviceconf) }}
 
-{%-         endfor %}
+{%-           endfor %}
+{%-         endif %}
 {%-       endif %}
 {%-     endfor %}
 {%-   endif %}
