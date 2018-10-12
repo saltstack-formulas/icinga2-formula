@@ -24,5 +24,5 @@
     - name: icinga2 feature {{ action }} {{ name }}
     - unless: "icinga2 feature list | grep '^{{ category }} features:.* {{ name }}\\( \\|$\\)'"
     - watch_in:
-      - service: icinga2
+      - service: icinga2_service_restart
 {%- endmacro %}

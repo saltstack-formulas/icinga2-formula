@@ -32,7 +32,7 @@ icinga2ido-pkg:
     - require:
       - pkg: icinga2_pkgs
     - watch_in:
-      - service: icinga2
+      - service: icinga2_service_restart
 
 icinga2ido-config:
   file.managed:
@@ -40,7 +40,7 @@ icinga2ido-config:
     - template: jinja
     - source: salt://icinga2/files/ido-pgsql.conf.jinja
     - watch_in:
-      - service: icinga2
+      - service: icinga2_service_restart
 
 {{ feature('ido-pgsql', True) }}
     - require:
