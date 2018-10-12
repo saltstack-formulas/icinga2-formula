@@ -1,2 +1,7 @@
 Debian: {}
-Ubuntu: {}
+FreeBSD:
+  configure_repositories: False
+  config_dir: /usr/local/etc/icinga2
+  icinga_web2:
+    config_dir: /usr/local/etc/icingaweb2
+    modules_dir: /usr/local/www/icingaweb2/modules

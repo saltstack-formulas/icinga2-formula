@@ -1,12 +1,37 @@
 icinga2:
+  config_dir: /etc/icinga2
   pkgs:
     - icinga2
+  postgresql_pkgs:
+    - postgresql-client
   service: icinga2
+  configure_repositories: True
+  ido:
+    db:
+      name: icinga
+      user: icinga2ido
+      # None => lets the state fail which is desired!
+      password:
+      host: 127.0.0.1
+      port: 5432
+    schema_path: /usr/share/icinga2-ido-pgsql/schema/pgsql.sql
+    pkg: icinga2-ido-pgsql
   icinga_web2:
+    config_dir: /etc/icingaweb2
+    modules_dir: /usr/share/icingaweb2/modules
+    db:
+      name: icinga2web
+      user: icinga2web
+      # None => lets the state fail which is desired!
+      password:
+      host: 127.0.0.1
+      port: 5432
     pkgs:
       - icingaweb2
       - icingaweb2-module-doc
       - icingaweb2-module-monitoring
+    postgresql_pkgs:
+      - postgresql
     required_pkgs:
       - php-fpm
       - php-pgsql

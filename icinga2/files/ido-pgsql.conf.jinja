@@ -1,0 +1,19 @@
+{% from "icinga2/map.jinja" import icinga2 with context %}
+
+/**
+ * The db_ido_pgsql library implements IDO functionality
+ * for PostgreSQL.
+ *
+ * MANAGED BY SALT. DO NOT EDIT!
+ *
+ */
+
+library "db_ido_pgsql"
+
+object IdoPgsqlConnection "ido-pgsql" {
+  user = "{{ icinga2.ido.db.user }}",
+  password = "{{ icinga2.ido.db.password }}",
+  host = "{{ icinga2.ido.db.host }}",
+  database = "{{ icinga2.ido.db.name }}"
+}
+

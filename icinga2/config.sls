@@ -48,30 +48,30 @@
 ### Begin hosts configuration
 {%-   if conf.hosts is defined %}
 
-/etc/conf.d/hosts/:
+{{ icinga2.config_dir }}/conf.d/hosts/:
   file.directory
 
 {%-     for host, hostconf in conf.hosts.items() %}
 
-/etc/conf.d/hosts/{{ host }}.conf:
+{{ icinga2.config_dir }}/conf.d/hosts/{{ host }}.conf:
   file.managed:
     - require:
-      - file: /etc/conf.d/hosts/
+      - file: {{ icinga2.config_dir }}/conf.d/hosts/
     - watch_in:
       - service: icinga2
     - contents: |
 {{ printconfig("object", "Host", host, hostconf) }}
 
 {%-       if hostconf.services is defined %}
-/etc/conf.d/hosts/{{ host }}:
+{{ icinga2.config_dir }}/conf.d/hosts/{{ host }}:
   file.directory
 
 {%-         for service, serviceconf in hostconf.services.items() %}
 
-/etc/conf.d/hosts/{{ host }}/{{ service }}.conf:
+{{ icinga2.config_dir }}/conf.d/hosts/{{ host }}/{{ service }}.conf:
   file.managed:
     - require:
-      - file: /etc/conf.d/hosts/{{ host }}
+      - file: {{ icinga2.config_dir }}/conf.d/hosts/{{ host }}
     - watch_in:
       - service: icinga2
     - contents: |
@@ -86,7 +86,7 @@
 ### Begin hostgroups configuration
 
 {%-   if conf.hostgroups is defined %}
-/etc/conf.d/hostsgroups.conf:
+{{ icinga2.config_dir }}/conf.d/hostsgroups.conf:
   file.managed:
     - watch_in:
       - service: icinga2
@@ -100,16 +100,16 @@
 
 ### Begin template configuration
 {%-   if conf.templates is defined %}
-/etc/conf.d/templates:
+{{ icinga2.config_dir }}/conf.d/templates:
   file.directory:
     - require:
       - pkg: icinga2
 
 {%-     for template, templateinfo in conf.templates.items() %}
-/etc/conf.d/templates/{{ template }}.conf:
+{{ icinga2.config_dir }}/conf.d/templates/{{ template }}.conf:
   file.managed:
     - require:
-      - file: /etc/conf.d/templates
+      - file: {{ icinga2.config_dir }}/conf.d/templates
     - watch_in:
       - service: icinga2
     - contents: |
@@ -124,17 +124,17 @@
 {%-   for type, objecttype in applies.items() %}
 
 {%-     if conf[type] is defined %}
-/etc/conf.d/{{ type }}:
+{{ icinga2.config_dir }}/conf.d/{{ type }}:
   file.directory:
     - require:
       - pkg: icinga2
 
 {%-       for apply, applyinfo in conf[type].items() %}
 {% set applyto = applyinfo["apply_to"]|default('') %}
-/etc/conf.d/{{ type }}/{{ apply }}.conf:
+{{ icinga2.config_dir }}/conf.d/{{ type }}/{{ apply }}.conf:
   file.managed:
     - require:
-      - file: /etc/conf.d/{{ type }}
+      - file: {{ icinga2.config_dir }}/conf.d/{{ type }}
     - watch_in:
       - service: icinga2
     - contents: |

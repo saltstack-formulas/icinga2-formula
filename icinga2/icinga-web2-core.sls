@@ -19,8 +19,9 @@ icinga2-web2:
 #Configure automatically Icinga web, avoiding the use of the php wizard
 icinga2web-autoconfigure:
   file.recurse:
-    - name: /etc/icingaweb2
-    - source: salt://icinga2/files/etc/
+    - name: "{{ icinga2.icinga_web2.config_dir }}"
+    - source: salt://icinga2/files/etc.icingaweb2/
+    - template: jinja
     - makedirs: True
     - user: www-data
     - group: icingaweb2
@@ -29,8 +30,8 @@ icinga2web-autoconfigure:
 
 icinga2web-autoconfigure-finalize:
   file.symlink:
-    - name: /etc/icingaweb2/enabledModules/monitoring
-    - target: /usr/share/icingaweb2/modules/monitoring
+    - name: "{{ icinga2.icinga_web2.config_dir }}/enabledModules/monitoring"
+    - target: "{{ icinga2.icinga_web2.modules_dir }}/monitoring"
     - makedirs: True
     - user: www-data
     - group:  icingaweb2
