@@ -82,3 +82,6 @@ icinga2:
               ssh_port: 43
               sla: "24x7"
 
+      # Removes this host from Icinga
+      deprecated.example.com:
+        remove: True

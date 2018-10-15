@@ -53,31 +53,44 @@
 
 {%-     for host, hostconf in conf.hosts.items() %}
 
-{{ icinga2.config_dir }}/conf.d/hosts/{{ host }}.conf:
+{%-       set path = "{}/conf.d/hosts/{}".format(icinga2.config_dir, host) %}
+
+{%-       if hostconf['remove'] is sameas true %}
+{{ path }}.conf:
+  file.absent:
+    - watch_in:
+      - service: icinga2_service_reload
+{{ path }}/:
+  file.absent:
+    - watch_in:
+      - service: icinga2_service_reload
+{%-       else %}
+{{ path }}.conf:
   file.managed:
     - require:
       - file: {{ icinga2.config_dir }}/conf.d/hosts/
     - watch_in:
-      - service: icinga2
+      - service: icinga2_service_reload
     - contents: |
 {{ printconfig("object", "Host", host, hostconf) }}
 
-{%-       if hostconf.services is defined %}
-{{ icinga2.config_dir }}/conf.d/hosts/{{ host }}:
+{%-         if hostconf.services is defined %}
+{{ path}}:
   file.directory
 
-{%-         for service, serviceconf in hostconf.services.items() %}
+{%-           for service, serviceconf in hostconf.services.items() %}
 
-{{ icinga2.config_dir }}/conf.d/hosts/{{ host }}/{{ service }}.conf:
+{{ path }}/{{ service }}.conf:
   file.managed:
     - require:
       - file: {{ icinga2.config_dir }}/conf.d/hosts/{{ host }}
     - watch_in:
-      - service: icinga2
+      - service: icinga2_service_reload
     - contents: |
 {{ printconfig("object", "Service", service, serviceconf) }}
 
-{%-         endfor %}
+{%-           endfor %}
+{%-         endif %}
 {%-       endif %}
 {%-     endfor %}
 {%-   endif %}
@@ -89,7 +102,7 @@
 {{ icinga2.config_dir }}/conf.d/hostsgroups.conf:
   file.managed:
     - watch_in:
-      - service: icinga2
+      - service: icinga2_service_reload
     - contents: |
 {%-     for hostgroup, hostgroupconf in conf.hostgroups.items() %}
 {{ printconfig("object", "HostGroup", hostgroup, hostgroupconf) }}
@@ -111,7 +124,7 @@
     - require:
       - file: {{ icinga2.config_dir }}/conf.d/templates
     - watch_in:
-      - service: icinga2
+      - service: icinga2_service_reload
     - contents: |
 {{ printconfig("template", templateinfo["type"], template, templateinfo["conf"]) }}
 
@@ -136,7 +149,7 @@
     - require:
       - file: {{ icinga2.config_dir }}/conf.d/{{ type }}
     - watch_in:
-      - service: icinga2
+      - service: icinga2_service_reload
     - contents: |
 {{ printconfig("apply", applyinfo["type"], apply, applyinfo["conf"], applyto) }}
 
