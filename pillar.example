@@ -82,6 +82,12 @@ icinga2:
               ssh_port: 43
               sla: "24x7"
 
+      # Minimalistic, supply only hostname
+      example2.test: {}
+        # sets
+        # address: example2.test
+        # import: generic-host
+
       # Removes this host from Icinga
       deprecated.example.com:
         remove: True
