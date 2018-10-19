@@ -54,6 +54,12 @@
 {%-     for host, hostconf in conf.hosts.items() %}
 
 {%-       set path = "{}/conf.d/hosts/{}".format(icinga2.config_dir, host) %}
+{%-       if not hostconf.get('address', False) %}
+{%-         do hostconf.update({'address': host}) %}
+{%-       endif %}
+{%-       if not hostconf.get('import', False) %}
+{%-         do hostconf.update({'import': 'generic-host'}) %}
+{%-       endif %}
 
 {%-       if hostconf['remove'] is sameas true %}
 {{ path }}.conf:
