@@ -1,5 +1,8 @@
 icinga2:
   config_dir: /etc/icinga2
+  home_dir: /var/lib/nagios
+  user: nagios
+  group: nagios
   pkgs:
     - icinga2
   postgresql_pkgs:
@@ -51,3 +54,9 @@ icinga2:
       perfdata: False
       statusdata: False
       syslog: False
+
+  notification:
+    xmpp:
+      pkg: python3-slixmpp
+      python_executable: python3
+      ca_file: /etc/ssl/certs/ca-certificates.crt

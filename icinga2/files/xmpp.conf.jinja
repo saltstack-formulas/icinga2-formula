@@ -1,0 +1,70 @@
+template NotificationCommand "xmpp-notification-template" {
+  import "plugin-notification-command"
+ 
+  command = [
+    "{{ sender }}",
+    "$xmpp_recipient$",
+    "$xmpp_message$"
+  ]
+ 
+  vars.xmpp_recipient = "$jabber$"
+
+  // Hide credentials from 'ps' & Co.
+  // by using environment variables,
+  // but also makes the used XMPP account
+  // configurable.
+  env = {
+    XMPP_JID = "$xmpp_jid$"
+    XMPP_PASSWORD = "$xmpp_password$"
+  }
+}
+ 
+template NotificationCommand "xmpp-host-notification-template" {
+  import "xmpp-notification-template"
+ 
+  vars.xmpp_message = {{ "{{{" }}$host.display_name$ is $host.state$
+Date/Time: $icinga.long_date_time$
+  
+Host: $host.display_name$
+Address: $address$
+State: $host.state$
+ 
+Notification Type: $notification.type$
+ 
+Additional Info: $host.output$
+ 
+Comment: [$notification.author$] $notification.comment${{ "}}}" }}
+}
+ 
+template NotificationCommand "xmpp-service-notification-template" {
+  import "xmpp-notification-template"
+ 
+  vars.xmpp_message = {{ "{{{" }}$service.name$ on $host.display_name$ is $service.state$
+Date/Time: $icinga.long_date_time$
+  
+Service: $service.name$
+Host: $host.display_name$
+Address: $address$
+State: $service.state$
+ 
+Notification Type: $notification.type$
+ 
+Additional Info: $service.output$
+ 
+Comment: [$notification.author$] $notification.comment${{ "}}}" }}
+}
+
+object NotificationCommand "xmpp-host-notification" {
+  import "xmpp-host-notification-template"
+
+  vars.xmpp_jid = "{{ jid }}"
+  vars.xmpp_password = "{{ password }}"
+}
+
+object NotificationCommand "xmpp-service-notification" {
+  import "xmpp-service-notification-template"
+
+  vars.xmpp_jid = "{{ jid }}"
+  vars.xmpp_password = "{{ password }}"
+}
+

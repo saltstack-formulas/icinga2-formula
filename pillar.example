@@ -26,6 +26,12 @@ icinga2:
         statusdata: True
         # ...
 
+    notification:
+      xmpp:
+        pkg: python3-slixmpp
+        python_executable: python3
+        ca_file: /etc/ssl/certs/ca-certificates.crt
+
   postgres:
     use_formula: False  # set to True if you are using postgres-formula
 
@@ -95,3 +101,8 @@ icinga2:
       # Removes this host from Icinga
       deprecated.example.com:
         remove: True
+
+  notification:
+    xmpp:
+      jid: icinga@jabber.example.test
+      password: supersecurerandomizeduniquepassword
