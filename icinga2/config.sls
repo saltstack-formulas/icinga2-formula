@@ -122,7 +122,7 @@
 {{ icinga2.config_dir }}/conf.d/templates:
   file.directory:
     - require:
-      - pkg: icinga2
+      - pkg: icinga2_pkgs
 
 {%-     for template, templateinfo in conf.templates.items() %}
 {{ icinga2.config_dir }}/conf.d/templates/{{ template }}.conf:
@@ -146,7 +146,7 @@
 {{ icinga2.config_dir }}/conf.d/{{ type }}:
   file.directory:
     - require:
-      - pkg: icinga2
+      - pkg: icinga2_pkgs
 
 {%-       for apply, applyinfo in conf[type].items() %}
 {% set applyto = applyinfo["apply_to"]|default('') %}
