@@ -38,6 +38,10 @@ icinga2:
       DAEMON_OPTS: "\"--no-ssl\""
 
   conf:
+    users:
+      alice:
+        vars:
+          jabber: alice@jabber.example.test
     templates:
       special-host:
         type: Host

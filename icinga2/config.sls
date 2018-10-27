@@ -138,6 +138,27 @@
 {%-   endif %}
 ### End template configuration
 
+### Begin user configuration
+{%-   if conf.users is defined %}
+{{ icinga2.config_dir }}/conf.d/users:
+  file.directory:
+    - require:
+      - pkg: icinga2_pkgs
+
+{%-     for user, userinfo in conf.users.items() %}
+{{ icinga2.config_dir }}/conf.d/users/{{ user }}.conf:
+  file.managed:
+    - require:
+      - file: {{ icinga2.config_dir }}/conf.d/users
+    - watch_in:
+      - service: icinga2_service_reload
+    - contents: |
+{{ printconfig("object", "User", user, userinfo) }}
+
+{%-     endfor%}
+{%-   endif %}
+### End user configuration
+
 ### Begin apply configuration
 {% set applies = { "downtimes": "ScheduledDowntime", "services": "Service", "notifications": "Notification"} %}
 {%-   for type, objecttype in applies.items() %}
