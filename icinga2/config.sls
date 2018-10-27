@@ -36,6 +36,12 @@
 {%-   elif value is number %}
           {{ key }} = {{ value }}
 
+{%-   elif value is string %}
+          {{ key }} = "{{ value }}"
+
+{%-   elif value is iterable %}
+          {{ key }} = [ "{{ value|join('", "') }}" ]
+
 {%-   else %}
           {{ key }} = "{{ value }}"
 {%-   endif %}
@@ -163,7 +169,7 @@
 {% set applies = { "downtimes": "ScheduledDowntime", "services": "Service", "notifications": "Notification"} %}
 {%-   for type, objecttype in applies.items() %}
 
-{%-     if conf[type] is defined %}
+{%-     if type in conf %}
 {{ icinga2.config_dir }}/conf.d/{{ type }}:
   file.directory:
     - require:
@@ -178,7 +184,7 @@
     - watch_in:
       - service: icinga2_service_reload
     - contents: |
-{{ printconfig("apply", applyinfo["type"], apply, applyinfo["conf"], applyto) }}
+{{ printconfig("apply", applyinfo.get("type", objecttype), apply, applyinfo.get("conf", {}), applyto) }}
 
 {%-       endfor%}
 {%-     endif %}
