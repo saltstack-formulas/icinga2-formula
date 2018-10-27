@@ -26,6 +26,12 @@ icinga2:
         statusdata: True
         # ...
 
+    notification:
+      xmpp:
+        pkg: python3-slixmpp
+        python_executable: python3
+        ca_file: /etc/ssl/certs/ca-certificates.crt
+
   postgres:
     use_formula: False  # set to True if you are using postgres-formula
 
@@ -38,6 +44,10 @@ icinga2:
       DAEMON_OPTS: "\"--no-ssl\""
 
   conf:
+    users:
+      alice:
+        vars:
+          jabber: alice@jabber.example.test
     templates:
       special-host:
         type: Host
@@ -91,3 +101,26 @@ icinga2:
       # Removes this host from Icinga
       deprecated.example.com:
         remove: True
+
+    notifications:
+      'xmpp-host':
+        # opt-in to trigger application
+        apply_to: Host
+        conf:
+          users:
+            - alice
+          # defined by icinga.notification.xmpp
+          command: 'xmpp-host-notification'
+          assign:
+            - 'true'
+
+    downtimes:
+      # see 'notifications' above
+
+    services:
+      # see 'notifications' above
+
+  notification:
+    xmpp:
+      jid: icinga@jabber.example.test
+      password: supersecurerandomizeduniquepassword

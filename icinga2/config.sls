@@ -36,6 +36,12 @@
 {%-   elif value is number %}
           {{ key }} = {{ value }}
 
+{%-   elif value is string %}
+          {{ key }} = "{{ value }}"
+
+{%-   elif value is iterable %}
+          {{ key }} = [ "{{ value|join('", "') }}" ]
+
 {%-   else %}
           {{ key }} = "{{ value }}"
 {%-   endif %}
@@ -122,7 +128,7 @@
 {{ icinga2.config_dir }}/conf.d/templates:
   file.directory:
     - require:
-      - pkg: icinga2
+      - pkg: icinga2_pkgs
 
 {%-     for template, templateinfo in conf.templates.items() %}
 {{ icinga2.config_dir }}/conf.d/templates/{{ template }}.conf:
@@ -138,15 +144,36 @@
 {%-   endif %}
 ### End template configuration
 
+### Begin user configuration
+{%-   if conf.users is defined %}
+{{ icinga2.config_dir }}/conf.d/users:
+  file.directory:
+    - require:
+      - pkg: icinga2_pkgs
+
+{%-     for user, userinfo in conf.users.items() %}
+{{ icinga2.config_dir }}/conf.d/users/{{ user }}.conf:
+  file.managed:
+    - require:
+      - file: {{ icinga2.config_dir }}/conf.d/users
+    - watch_in:
+      - service: icinga2_service_reload
+    - contents: |
+{{ printconfig("object", "User", user, userinfo) }}
+
+{%-     endfor%}
+{%-   endif %}
+### End user configuration
+
 ### Begin apply configuration
 {% set applies = { "downtimes": "ScheduledDowntime", "services": "Service", "notifications": "Notification"} %}
 {%-   for type, objecttype in applies.items() %}
 
-{%-     if conf[type] is defined %}
+{%-     if type in conf %}
 {{ icinga2.config_dir }}/conf.d/{{ type }}:
   file.directory:
     - require:
-      - pkg: icinga2
+      - pkg: icinga2_pkgs
 
 {%-       for apply, applyinfo in conf[type].items() %}
 {% set applyto = applyinfo["apply_to"]|default('') %}
@@ -157,7 +184,7 @@
     - watch_in:
       - service: icinga2_service_reload
     - contents: |
-{{ printconfig("apply", applyinfo["type"], apply, applyinfo["conf"], applyto) }}
+{{ printconfig("apply", applyinfo.get("type", objecttype), apply, applyinfo.get("conf", {}), applyto) }}
 
 {%-       endfor%}
 {%-     endif %}
