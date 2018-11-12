@@ -33,6 +33,11 @@
           {{ key }} where {{ item }}
 {%-     endfor %}
 
+{%-   elif value is sameas True %}
+          {{ key }} = true
+{%-   elif value is sameas False %}
+          {{ key }} = false
+
 {%-   elif value is number %}
           {{ key }} = {{ value }}
 
