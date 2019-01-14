@@ -16,6 +16,10 @@ icinga2-web2:
 {{ feature(name, enable) }}
 {%  endfor %}
 
+icingaweb2-group:
+  group.present:
+    - name: {{ icinga2.icinga_web2.group }}
+
 #Configure automatically Icinga web, avoiding the use of the php wizard
 icinga2web-autoconfigure:
   file.recurse:
@@ -23,15 +27,19 @@ icinga2web-autoconfigure:
     - source: salt://icinga2/files/etc.icingaweb2/
     - template: jinja
     - makedirs: True
-    - user: www-data
-    - group: icingaweb2
+    - user: {{ icinga2.icinga_web2.user }}
+    - group: {{ icinga2.icinga_web2.group }}
     - dir_mode: 750
     - file_mode: 644
+    - require:
+      - group: icingaweb2-group
 
 icinga2web-autoconfigure-finalize:
   file.symlink:
     - name: "{{ icinga2.icinga_web2.config_dir }}/enabledModules/monitoring"
     - target: "{{ icinga2.icinga_web2.modules_dir }}/monitoring"
     - makedirs: True
-    - user: www-data
-    - group:  icingaweb2
+    - user: {{ icinga2.icinga_web2.user }}
+    - group: {{ icinga2.icinga_web2.group }}
+    - require:
+      - group: icingaweb2-group

@@ -26,6 +26,7 @@ debconf_pgsql_ido:
       - pkg: icinga2ido-pkg
 {% endif %}
 
+{% if icinga2.ido.pkg %}
 icinga2ido-pkg:
   pkg.installed:
     - name: "{{ icinga2.ido.pkg }}"
@@ -33,6 +34,7 @@ icinga2ido-pkg:
       - pkg: icinga2_pkgs
     - watch_in:
       - service: icinga2_service_restart
+{% endif %}
 
 icinga2ido-config:
   file.managed:
@@ -44,7 +46,9 @@ icinga2ido-config:
 
 {{ feature('ido-pgsql', True) }}
     - require:
+{% if icinga2.ido.pkg %}
       - pkg: icinga2ido-pkg
+{% endif %}
       - file: icinga2ido-config
 
 is-icinga2ido-password-set:
