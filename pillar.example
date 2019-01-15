@@ -46,8 +46,14 @@ icinga2:
   conf:
     users:
       alice:
+        email: alice@example.test
+        groups:
+          - icingaadmins
         vars:
           jabber: alice@jabber.example.test
+    user_groups:
+      icingaadmins:
+        display_name: "Icinga 2 Admin Group"
     templates:
       special-host:
         type: Host
