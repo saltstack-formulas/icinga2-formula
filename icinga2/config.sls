@@ -179,6 +179,27 @@
 {%-   endif %}
 ### End user configuration
 
+### Begin user group configuration
+{%-   if conf.user_groups is defined %}
+{{ icinga2.config_dir }}/conf.d/user_groups:
+  file.directory:
+    - require:
+      - pkg: icinga2_pkgs
+
+{%-     for group, groupinfo in conf.user_groups.items() %}
+{{ icinga2.config_dir }}/conf.d/user_groups/{{ group }}.conf:
+  file.managed:
+    - require:
+      - file: {{ icinga2.config_dir }}/conf.d/user_groups
+    - watch_in:
+      - service: icinga2_service_reload
+    - contents: |
+{{ printconfig("object", "UserGroup", group, groupinfo) }}
+
+{%-     endfor%}
+{%-   endif %}
+### End user group configuration
+
 ### Begin apply configuration
 {% set applies = { "downtimes": "ScheduledDowntime", "services": "Service", "notifications": "Notification"} %}
 {%-   for type, objecttype in applies.items() %}
