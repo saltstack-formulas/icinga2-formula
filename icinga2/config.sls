@@ -54,13 +54,22 @@
         }
 {%-endmacro%}
 
-{%- if grains['os_family'] in ['Debian']  %}
+{%- if grains['os_family'] in ['Debian', 'FreeBSD']  %}
 
 ### Begin hosts configuration
 {%-   if conf.hosts is defined %}
 
 {{ icinga2.config_dir }}/conf.d/hosts/:
   file.directory
+
+{%-     if grains['os_family'] in ['FreeBSD']  %}
+{#-       Remove duplicate host entry of Icinga host #}
+{{ icinga2.config_dir }}/conf.d/hosts.conf:
+  file.managed:
+    - contents: ''
+    - watch_in:
+      - service: icinga2_service_reload
+{%-     endif %}
 
 {%-     for host, hostconf in conf.hosts.items() %}
 

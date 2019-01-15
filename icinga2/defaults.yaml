@@ -22,6 +22,8 @@ icinga2:
   icinga_web2:
     config_dir: /etc/icingaweb2
     modules_dir: /usr/share/icingaweb2/modules
+    user: www-data
+    group: icingaweb2
     db:
       name: icinga2web
       user: icinga2web
