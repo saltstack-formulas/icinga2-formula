@@ -21,3 +21,10 @@ FreeBSD:
     # In FreeBSD IDO is included in the icinga2 package.
     pkg: False
     schema_path: /usr/local/share/icinga2-ido-pgsql/schema/pgsql.sql
+  notification:
+    xmpp:
+      pkg: py36-slixmpp
+      python_executable: python3.6
+      ca_file: /usr/local/share/certs/ca-root-nss.crt
+      additional_pkgs:
+        - ca_root_nss
