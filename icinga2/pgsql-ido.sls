@@ -64,7 +64,6 @@ icinga2ido-db-setup:
     - password: "{{ icinga2.ido.db.password }}"
     - createdb: True
     - createroles: True
-    - createuser: True
     - inherit: True
     - login: True
     # Necessary as of PostgreSQL 10

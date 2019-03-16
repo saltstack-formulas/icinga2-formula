@@ -14,7 +14,6 @@ icinga2web-db-setup:
     - password: "{{ icinga2.icinga_web2.db.password }}"
     - createdb: True
     - createroles: True
-    - createuser: True
     - inherit: True
     - login: True
     # Necessary as of PostgreSQL 10
