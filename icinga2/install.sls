@@ -7,7 +7,7 @@ include:
 
 icinga2_pkgs:
   pkg.installed:
-    - pkgs: {{ icinga2.pkgs }}
+    - pkgs: {{ icinga2.pkgs | json }}
 {% if icinga2.configure_repositories %}
     - require:
       - pkgrepo: icinga_repo
