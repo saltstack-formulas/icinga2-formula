@@ -16,7 +16,7 @@ extend:
 {%-   else %}
 postgresql_packages_for_icinga_ido:
   pkg.installed:
-    - pkgs: {{ icinga2.postgresql_pkgs }}
+    - pkgs: {{ icinga2.postgresql_pkgs | json }}
     - require_in:
       - pkg: {{ dependent_pkg }}
 {%-   endif %}

@@ -6,11 +6,11 @@ include:
 
 icinga2-web2-required-packages:
   pkg.installed:
-    - pkgs: {{ icinga2.icinga_web2.required_pkgs }}
+    - pkgs: {{ icinga2.icinga_web2.required_pkgs | json }}
 
 icinga2-web2:
   pkg.installed:
-    - pkgs: {{ icinga2.icinga_web2.pkgs }}
+    - pkgs: {{ icinga2.icinga_web2.pkgs | json }}
 
 {%- for name, enable in icinga2.icinga_web2.features.items() %}
 {{ feature(name, enable) }}
