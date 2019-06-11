@@ -89,6 +89,11 @@ Adds the Debian / Ubuntu repository to get Icinga2 packages from if (and only if
 the machine happens to run one of the mentioned operating systems.
 
 
+``icinga2.check_command.openvpn``
+-----------------------------
+
+Sets up CheckCommand ``openvpn`` using `<https://github.com/liquidat/nagios-icinga-openvpn>`.
+
 ``icinga2.notification.xmpp``
 -----------------------------
 

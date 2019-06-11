@@ -2,6 +2,9 @@ Debian: {}
 FreeBSD:
   configure_repositories: False
   config_dir: /usr/local/etc/icinga2
+  check_command_dir: /usr/local/etc/icinga2/conf.d/check_command
+  confd_dir: /usr/local/etc/icinga2/conf.d
+  scripts_dir: /usr/local/etc/icinga2/scripts
   icinga_web2:
     config_dir: /usr/local/etc/icingaweb2
     modules_dir: /usr/local/www/icingaweb2/modules

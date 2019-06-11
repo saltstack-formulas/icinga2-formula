@@ -54,17 +54,20 @@
         }
 {%-endmacro%}
 
+include:
+  - .directories
+
 {%- if grains['os_family'] in ['Debian', 'FreeBSD']  %}
 
 ### Begin hosts configuration
 {%-   if conf.hosts is defined %}
 
-{{ icinga2.config_dir }}/conf.d/hosts/:
+{{ icinga2.confd_dir }}/hosts/:
   file.directory
 
 {%-     if grains['os_family'] in ['FreeBSD']  %}
 {#-       Remove duplicate host entry of Icinga host #}
-{{ icinga2.config_dir }}/conf.d/hosts.conf:
+{{ icinga2.confd_dir }}/hosts.conf:
   file.managed:
     - contents: ''
     - watch_in:
@@ -94,7 +97,7 @@
 {{ path }}.conf:
   file.managed:
     - require:
-      - file: {{ icinga2.config_dir }}/conf.d/hosts/
+      - file: {{ icinga2.confd_dir }}/hosts/
     - watch_in:
       - service: icinga2_service_reload
     - contents: |
@@ -109,7 +112,7 @@
 {{ path }}/{{ service }}.conf:
   file.managed:
     - require:
-      - file: {{ icinga2.config_dir }}/conf.d/hosts/{{ host }}
+      - file: {{ icinga2.confd_dir }}/hosts/{{ host }}
     - watch_in:
       - service: icinga2_service_reload
     - contents: |
@@ -125,7 +128,7 @@
 ### Begin hostgroups configuration
 
 {%-   if conf.hostgroups is defined %}
-{{ icinga2.config_dir }}/conf.d/hostsgroups.conf:
+{{ icinga2.confd_dir }}/hostsgroups.conf:
   file.managed:
     - watch_in:
       - service: icinga2_service_reload
@@ -139,16 +142,16 @@
 
 ### Begin template configuration
 {%-   if conf.templates is defined %}
-{{ icinga2.config_dir }}/conf.d/templates:
+{{ icinga2.confd_dir }}/templates:
   file.directory:
     - require:
       - pkg: icinga2_pkgs
 
 {%-     for template, templateinfo in conf.templates.items() %}
-{{ icinga2.config_dir }}/conf.d/templates/{{ template }}.conf:
+{{ icinga2.confd_dir }}/templates/{{ template }}.conf:
   file.managed:
     - require:
-      - file: {{ icinga2.config_dir }}/conf.d/templates
+      - file: {{ icinga2.confd_dir }}/templates
     - watch_in:
       - service: icinga2_service_reload
     - contents: |
@@ -160,16 +163,16 @@
 
 ### Begin user configuration
 {%-   if conf.users is defined %}
-{{ icinga2.config_dir }}/conf.d/users:
+{{ icinga2.confd_dir }}/users:
   file.directory:
     - require:
       - pkg: icinga2_pkgs
 
 {%-     for user, userinfo in conf.users.items() %}
-{{ icinga2.config_dir }}/conf.d/users/{{ user }}.conf:
+{{ icinga2.confd_dir }}/users/{{ user }}.conf:
   file.managed:
     - require:
-      - file: {{ icinga2.config_dir }}/conf.d/users
+      - file: {{ icinga2.confd_dir }}/users
     - watch_in:
       - service: icinga2_service_reload
     - contents: |
@@ -181,16 +184,16 @@
 
 ### Begin user group configuration
 {%-   if conf.user_groups is defined %}
-{{ icinga2.config_dir }}/conf.d/user_groups:
+{{ icinga2.confd_dir }}/user_groups:
   file.directory:
     - require:
       - pkg: icinga2_pkgs
 
 {%-     for group, groupinfo in conf.user_groups.items() %}
-{{ icinga2.config_dir }}/conf.d/user_groups/{{ group }}.conf:
+{{ icinga2.confd_dir }}/user_groups/{{ group }}.conf:
   file.managed:
     - require:
-      - file: {{ icinga2.config_dir }}/conf.d/user_groups
+      - file: {{ icinga2.confd_dir }}/user_groups
     - watch_in:
       - service: icinga2_service_reload
     - contents: |
@@ -205,17 +208,17 @@
 {%-   for type, objecttype in applies.items() %}
 
 {%-     if type in conf %}
-{{ icinga2.config_dir }}/conf.d/{{ type }}:
+{{ icinga2.confd_dir }}/{{ type }}:
   file.directory:
     - require:
       - pkg: icinga2_pkgs
 
 {%-       for apply, applyinfo in conf[type].items() %}
 {% set applyto = applyinfo["apply_to"]|default('') %}
-{{ icinga2.config_dir }}/conf.d/{{ type }}/{{ apply }}.conf:
+{{ icinga2.confd_dir }}/{{ type }}/{{ apply }}.conf:
   file.managed:
     - require:
-      - file: {{ icinga2.config_dir }}/conf.d/{{ type }}
+      - file: {{ icinga2.confd_dir }}/{{ type }}
     - watch_in:
       - service: icinga2_service_reload
     - contents: |
