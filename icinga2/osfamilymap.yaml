@@ -1,5 +1,7 @@
 Debian: {}
 FreeBSD:
+  user: icinga
+  group: icinga
   configure_repositories: False
   config_dir: /usr/local/etc/icinga2
   check_command_dir: /usr/local/etc/icinga2/conf.d/check_command
