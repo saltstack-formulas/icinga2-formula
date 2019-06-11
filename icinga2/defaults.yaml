@@ -1,5 +1,8 @@
 icinga2:
   config_dir: /etc/icinga2
+  confd_dir: /etc/icinga2/conf.d
+  check_command_dir: /etc/icinga2/conf.d/check_command
+  scripts_dir: /etc/icinga2/scripts
   home_dir: /var/lib/nagios
   user: nagios
   group: nagios
@@ -56,6 +59,11 @@ icinga2:
       perfdata: False
       statusdata: False
       syslog: False
+
+  check_command:
+    openvpn:
+      revision: b03efd98439e9b82b66f9b2e6e7b7f666b744a63
+      branch: master
 
   notification:
     xmpp:
