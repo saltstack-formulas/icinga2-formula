@@ -110,13 +110,17 @@ include:
 {%-           for service, serviceconf in hostconf.services.items() %}
 
 {{ path }}/{{ service }}.conf:
+{%-             if serviceconf['remove'] is sameas true %}
+  file.absent:
+{%-             else %}
   file.managed:
     - require:
       - file: {{ icinga2.confd_dir }}/hosts/{{ host }}
-    - watch_in:
-      - service: icinga2_service_reload
     - contents: |
 {{ printconfig("object", "Service", service, serviceconf) }}
+{%-             endif %}
+    - watch_in:
+      - service: icinga2_service_reload
 
 {%-           endfor %}
 {%-         endif %}
