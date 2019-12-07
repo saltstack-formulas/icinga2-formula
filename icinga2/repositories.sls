@@ -1,3 +1,5 @@
+{% from "icinga2/map.jinja" import icinga2 with context %}
+
 {% if grains.os == 'Debian' %}
 icinga_repo_required_packages:
   pkg.installed:
@@ -8,6 +10,15 @@ icinga_repo_required_packages:
 # The old repo's name
 debmon:
   pkgrepo.absent: []
+
+# Icinga require packages from debian backports
+{% if icinga2.get('enable_debian_backports', True) %}
+icinga_repo_debian_backports:
+  pkgrepo.managed:
+    - humanname: debian_backports
+    - name: deb http://deb.debian.org/debian {{ grains['lsb_distrib_codename'] }}-backports main
+    - file: /etc/apt/sources.list.d/backports.list
+{% endif %}
 {% endif %}
 
 icinga_repo:
