@@ -11,6 +11,8 @@ icinga2-web2-required-packages:
 icinga2-web2:
   pkg.installed:
     - pkgs: {{ icinga2.icinga_web2.pkgs | json }}
+    - require:
+      - pkg: icinga2-web2-required-packages
 
 {%- for name, enable in icinga2.icinga_web2.features.items() %}
 {{ feature(name, enable) }}
