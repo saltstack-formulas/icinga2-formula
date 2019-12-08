@@ -12,7 +12,7 @@ debmon:
   pkgrepo.absent: []
 
 # Icinga require packages from debian backports
-{% if icinga2.get('enable_debian_backports', True) %}
+{% if icinga2.enable_debian_backports %}
 icinga_repo_debian_backports:
   pkgrepo.managed:
     - humanname: debian_backports

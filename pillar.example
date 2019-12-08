@@ -1,6 +1,10 @@
 icinga2:
   lookup:  # See defaults.yaml and map.jinja for a better overview
     service: icinga2
+    # To use the icinga repo, on some Debian version, you have to enable
+    # debian-backports, like Debian Stretch.
+    configure_repositories: True
+    enable_debian_backports: False
     pkgs:
       - icinga2
       #- nagios-nrpe-plugin

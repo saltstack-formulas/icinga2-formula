@@ -12,7 +12,7 @@ icinga2:
     - postgresql-client
   service: icinga2
   configure_repositories: True
-  enable_debian_backports: True
+  enable_debian_backports: False
   ido:
     db:
       name: icinga
