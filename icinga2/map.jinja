@@ -26,3 +26,23 @@
     - watch_in:
       - service: icinga2_service_restart
 {%- endmacro %}
+
+{%- macro module(name, repo, branch, path, enable) %}
+{%-   set action = 'enable' if enable else 'disable' %}
+"icingaweb2_module_{{ name }}":
+  {% if action == "enable" %}
+  git.latest:
+    - name: {{ repo }}
+    - target: {{ path }}
+    - rev: {{ branch }}
+    - require:
+      - pkg: icinga2-web2
+  {% endif %}
+  cmd.run:
+    - name: icingacli module {{ action }} {{ name }}
+    - unless: "icingacli module list | grep '^{{ name }} .* enabled '"
+    {% if action == "enable" %}
+    - require:
+      - git: icingaweb2_module_{{ name }}
+    {% endif %}
+{%- endmacro %}
