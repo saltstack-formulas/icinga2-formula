@@ -47,18 +47,19 @@ icinga2:
       - php-intl
       - php-gd
       - php-imagick
-    features:
-      api: False
-      command: True
-      debuglog: False
-      gelf: False
-      graphite: False
-      influxdb: False
-      livestatus: False
-      opentsdb: False
-      perfdata: False
-      statusdata: False
-      syslog: False
+
+  features:
+    api: False
+    command: True
+    debuglog: False
+    gelf: False
+    graphite: False
+    influxdb: False
+    livestatus: False
+    opentsdb: False
+    perfdata: False
+    statusdata: False
+    syslog: False
 
   check_command:
     openvpn:
