@@ -12,10 +12,6 @@ icinga2-web2:
   pkg.installed:
     - pkgs: {{ icinga2.icinga_web2.pkgs | json }}
 
-{%- for name, enable in icinga2.icinga_web2.features.items() %}
-{{ feature(name, enable) }}
-{%  endfor %}
-
 icingaweb2-group:
   group.present:
     - name: {{ icinga2.icinga_web2.group }}

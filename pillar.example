@@ -16,15 +16,16 @@ icinga2:
         - ...
       required_pkgs:
         - ...
-      features:
-        api: False  # disable
-        command: True  # enable
-        gelf: True
-        graphite: True
-        opentsdb: True
-        perfdata: True
-        statusdata: True
-        # ...
+
+    features:
+       api: False  # disable
+       command: True  # enable
+       gelf: True
+       graphite: True
+       opentsdb: True
+       perfdata: True
+       statusdata: True
+       # ...
 
     notification:
       xmpp:
