@@ -60,7 +60,7 @@ icinga2:
       perfdata: False
       statusdata: False
       syslog: False
-    module_repo: https://github.com/Icinga/icingaweb2-module- # ${modulename}.git is appended
+    modules_repo: https://github.com/Icinga/icingaweb2-module- # ${modulename}.git is appended
     modules:
 
   check_command:

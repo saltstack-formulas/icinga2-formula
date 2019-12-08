@@ -3,9 +3,9 @@
 
 {% for name, data in icinga2.icinga_web2.modules.items() %}
 {{ module( name,
-           data.get("repo", icinga2.icinga_web2.module_repo + name + ".git"),
+           data.get("repo", icinga2.icinga_web2.modules_repo + name + ".git"),
            data.version,
-           data.get("path", icinga2.icinga_web2.module_dir + "/" + name),
+           data.get("path", icinga2.icinga_web2.modules_dir + "/" + name),
            data.get("enable", true)
          ) }}
 {% endfor %}
