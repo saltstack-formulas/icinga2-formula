@@ -47,6 +47,7 @@ icinga2:
       - php-intl
       - php-gd
       - php-imagick
+      - git
     features:
       api: False
       command: True
@@ -59,6 +60,8 @@ icinga2:
       perfdata: False
       statusdata: False
       syslog: False
+    modules_repo: https://github.com/Icinga/icingaweb2-module- # ${modulename}.git is appended
+    modules:
 
   check_command:
     openvpn:
