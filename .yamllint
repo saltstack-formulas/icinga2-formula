@@ -12,6 +12,7 @@ ignore: |
   node_modules/
   test/**/states/**/*.sls
   .kitchen/
+  icinga2/osfamilymap.yaml
 
 yaml-files:
   # Default settings

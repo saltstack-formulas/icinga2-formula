@@ -1,9 +1,12 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
 icinga2:
   lookup:  # See defaults.yaml and map.jinja for a better overview
     service: icinga2
     pkgs:
       - icinga2
-      #- nagios-nrpe-plugin
+      # - nagios-nrpe-plugin
     ido:
       db:
         # MUST BE SET when using icinga2.pgsql-ido
@@ -17,13 +20,13 @@ icinga2:
       required_pkgs:
         - ...
       features:
-        api: False  # disable
-        command: True  # enable
-        gelf: True
-        graphite: True
-        opentsdb: True
-        perfdata: True
-        statusdata: True
+        api: false  # disable
+        command: true  # enable
+        gelf: true
+        graphite: true
+        opentsdb: true
+        perfdata: true
+        statusdata: true
         # ...
 
     notification:
@@ -33,7 +36,7 @@ icinga2:
         ca_file: /etc/ssl/certs/ca-certificates.crt
 
   postgres:
-    use_formula: False  # set to True if you are using postgres-formula
+    use_formula: false  # set to true if you are using postgres-formula
 
   nrpe:  # deprecated
     config:
@@ -100,13 +103,13 @@ icinga2:
 
       # Minimalistic, supply only hostname
       example2.test: {}
-        # sets
-        # address: example2.test
-        # import: generic-host
+      # # sets
+      #   address: example2.test
+      #   import: generic-host
 
       # Removes this host from Icinga
       deprecated.example.com:
-        remove: True
+        remove: true
 
     notifications:
       'xmpp-host':
@@ -120,11 +123,11 @@ icinga2:
           assign:
             - 'true'
 
-    downtimes:
-      # see 'notifications' above
+    downtimes: {}
+    # see 'notifications' above
 
-    services:
-      # see 'notifications' above
+    services: {}
+    # see 'notifications' above
 
   notification:
     xmpp:

@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
 Debian: {}
 FreeBSD:
   user: icinga
   group: icinga
-  configure_repositories: False
+  configure_repositories: false
   config_dir: /usr/local/etc/icinga2
   check_command_dir: /usr/local/etc/icinga2/conf.d/check_command
   confd_dir: /usr/local/etc/icinga2/conf.d
@@ -14,17 +17,17 @@ FreeBSD:
     pkgs:
       - icingaweb2
     required_pkgs:
-{%- set phpng_version = salt['pillar.get']('php:ng:version', '7.2')|string %}
-{%- set freebsd_phpng_version = phpng_version.replace('.', '') %}
-      - mod_php{{ freebsd_phpng_version }}
-      - php{{ freebsd_phpng_version }}
-      - php{{ freebsd_phpng_version }}-gd
-      - php{{ freebsd_phpng_version }}-intl
-      - php{{ freebsd_phpng_version }}-pgsql
-      - php{{ freebsd_phpng_version }}-gd
+      {%- set php_version = salt['pillar.get']('php:version', '7.2')|string %}
+      {%- set freebsd_php_version = php_version.replace('.', '') %}
+      - mod_php{{ freebsd_php_version }}
+      - php{{ freebsd_php_version }}
+      - php{{ freebsd_php_version }}-gd
+      - php{{ freebsd_php_version }}-intl
+      - php{{ freebsd_php_version }}-pgsql
+      - php{{ freebsd_php_version }}-gd
   ido:
     # In FreeBSD IDO is included in the icinga2 package.
-    pkg: False
+    pkg: false
     schema_path: /usr/local/share/icinga2-ido-pgsql/schema/pgsql.sql
   notification:
     xmpp:
