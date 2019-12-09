@@ -1,5 +1,28 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 ---
-Debian: {}
-Ubuntu: {}
+# os_family: Debian
+Debian:
+  repo: 'debian'
+Ubuntu:
+  repo: 'ubuntu'
+Raspbian:
+  repo: 'raspbian'
+
+# os_family: RedHat
+Fedora:
+  repo: 'fedora'
+CentOS:
+  repo: 'epel'
+Amazon:
+  repo: 'epel'
+
+# os_family: Suse
+SUSE:
+  repo: 'SUSE'
+openSUSE:
+  repo: 'openSUSE'
+
+# os_family: Windows
+Windows:
+  repo: 'windows'
