@@ -1,0 +1,9 @@
+name: icinga2
+os: Debian, Ubuntu, Raspbian, RedHat, Fedora, CentOS, Suse, openSUSE, FreeBSD, OpenBSD, Windows
+os_family: Debian, RedHat, Suse, FreeBSD, OpenBSDWindows, MacOS
+version: 0.7.1
+release: 1
+minimum_version: 2017.7
+summary: icinga2 formula
+description: Formula to install and configure icinga2
+top_level_dir: icinga2
