@@ -27,6 +27,13 @@ debmon:
 {%- endif %}
 
 {%- if icinga2.repo and dist %}
+{%-   if grains.osfinger == 'Debian-9' %}
+icinga_deps_repo_for_stretch:
+  pkgrepo.managed:
+    - humanname: Stretch Backports
+    - name: deb http://http.debian.net/debian stretch-backports main
+    - dist: stretch-backports
+{%-   endif %}
 icinga_repo:
   pkgrepo.managed:
     - humanname: icinga_official
