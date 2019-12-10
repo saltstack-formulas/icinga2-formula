@@ -3,13 +3,13 @@
 
 {%- macro printconfig(type, object, name, config, applyto="") %}
         {{ type }} {{ object }} "{{ name }}" {% if applyto !="" %}to {% endif %}{{ applyto }}{% if applyto !="" %} {% endif %}{
-{%- for key, value in config.items()%}
+{%- for key, value in config.items() %}
 {%-   if key == "import" %}
-          {{key}} "{{ value }}"
+          {{ key }} "{{ value }}"
 {%-   endif %}
 {%- endfor %}
 
-{%- for key, value in config.items()%}
+{%- for key, value in config.items() %}
 {%-   if key == "import" %}
 {%-   elif key == "vars"  %}
 {%-     for varkey, varvalue in config.vars.items() %}
@@ -52,7 +52,7 @@
 {%-   endif %}
 {%- endfor %}
         }
-{%-endmacro%}
+{%- endmacro %}
 
 include:
   - .directories
@@ -104,7 +104,7 @@ include:
 {{ printconfig("object", "Host", host, hostconf) }}
 
 {%-         if hostconf.services is defined %}
-{{ path}}:
+{{ path }}:
   file.directory
 
 {%-           for service, serviceconf in hostconf.services.items() %}
@@ -157,7 +157,7 @@ include:
     - contents: |
 {{ printconfig("template", templateinfo["type"], template, templateinfo["conf"]) }}
 
-{%-     endfor%}
+{%-     endfor %}
 {%-   endif %}
 ### End template configuration
 
@@ -178,7 +178,7 @@ include:
     - contents: |
 {{ printconfig("object", "User", user, userinfo) }}
 
-{%-     endfor%}
+{%-     endfor %}
 {%-   endif %}
 ### End user configuration
 
@@ -199,7 +199,7 @@ include:
     - contents: |
 {{ printconfig("object", "UserGroup", group, groupinfo) }}
 
-{%-     endfor%}
+{%-     endfor %}
 {%-   endif %}
 ### End user group configuration
 
@@ -224,10 +224,10 @@ include:
     - contents: |
 {{ printconfig("apply", applyinfo.get("type", objecttype), apply, applyinfo.get("conf", {}), applyto) }}
 
-{%-       endfor%}
+{%-       endfor %}
 {%-     endif %}
 
-{%-   endfor%}
+{%-   endfor %}
 ### End apply configuration
 
 {% endif %}

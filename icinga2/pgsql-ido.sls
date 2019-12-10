@@ -38,7 +38,7 @@ icinga2ido-pkg:
 
 icinga2ido-config:
   file.managed:
-    - name: "{{ icinga2.config_dir}}/features-available/ido-pgsql.conf"
+    - name: "{{ icinga2.config_dir }}/features-available/ido-pgsql.conf"
     - template: jinja
     - source: salt://icinga2/files/ido-pgsql.conf.jinja
     - watch_in:
