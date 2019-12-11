@@ -6,6 +6,8 @@ include:
 
 {% if grains['os_family'] == 'Debian' %}
 debconf_pgsql_ido:
+  pkg.installed:
+    - name: debconf-utils
   debconf.set:
     - name: "{{ icinga2.ido.pkg }}"
     - data:
@@ -16,6 +18,8 @@ debconf_pgsql_ido:
         '{{ icinga2.ido.pkg }}/db/dbport': {'type': 'string', 'value': "{{ icinga2.ido.db.port }}"}
         '{{ icinga2.ido.pkg }}/db/dbserver': {'type': 'string', 'value': "{{ icinga2.ido.db.host }}"}
         '{{ icinga2.ido.pkg }}/enable': {'type': 'boolean', 'value': true}
+    - require:
+      - pkg: debconf_pgsql_ido
     - require_in:
       - pkg: icinga2ido-pkg
 
@@ -38,7 +42,7 @@ icinga2ido-pkg:
 
 icinga2ido-config:
   file.managed:
-    - name: "{{ icinga2.config_dir}}/features-available/ido-pgsql.conf"
+    - name: "{{ icinga2.config_dir }}/features-available/ido-pgsql.conf"
     - template: jinja
     - source: salt://icinga2/files/ido-pgsql.conf.jinja
     - watch_in:

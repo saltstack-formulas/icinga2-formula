@@ -1,5 +1,5 @@
 {# keep backwards compatibility #}
-{% set nrpe = salt['pillar.get']('nrpe', salt['pillar.get']('icinga2:lookup::nrpe', {}))%}
+{% set nrpe = salt['pillar.get']('nrpe', salt['pillar.get']('icinga2:lookup::nrpe', {})) %}
 
 
 include:

@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
 icinga2:
   config_dir: /etc/icinga2
   confd_dir: /etc/icinga2/conf.d
@@ -11,13 +14,13 @@ icinga2:
   postgresql_pkgs:
     - postgresql-client
   service: icinga2
-  configure_repositories: True
+  configure_repositories: true
   ido:
     db:
       name: icinga
       user: icinga2ido
       # None => lets the state fail which is desired!
-      password:
+      password: ~
       host: 127.0.0.1
       port: 5432
     schema_path: /usr/share/icinga2-ido-pgsql/schema/pgsql.sql
@@ -31,7 +34,7 @@ icinga2:
       name: icinga2web
       user: icinga2web
       # None => lets the state fail which is desired!
-      password:
+      password: ~
       host: 127.0.0.1
       port: 5432
     pkgs:
@@ -48,17 +51,17 @@ icinga2:
       - php-gd
       - php-imagick
     features:
-      api: False
-      command: True
-      debuglog: False
-      gelf: False
-      graphite: False
-      influxdb: False
-      livestatus: False
-      opentsdb: False
-      perfdata: False
-      statusdata: False
-      syslog: False
+      api: false
+      command: true
+      debuglog: false
+      gelf: false
+      graphite: false
+      influxdb: false
+      livestatus: false
+      opentsdb: false
+      perfdata: false
+      statusdata: false
+      syslog: false
 
   check_command:
     openvpn:

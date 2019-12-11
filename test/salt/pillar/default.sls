@@ -15,10 +15,10 @@ icinga2:
       db:
         # MUST BE SET when using icinga2.icinga-web2-database
         password: AnotherSecurePassword
-      pkgs:
-        - ...
-      required_pkgs:
-        - ...
+      # pkgs:
+      #   - ...
+      # required_pkgs:
+      #   - ...
       features:
         api: false  # disable
         command: true  # enable
@@ -36,7 +36,7 @@ icinga2:
         ca_file: /etc/ssl/certs/ca-certificates.crt
 
   postgres:
-    use_formula: false  # set to true if you are using postgres-formula
+    use_formula: true  # set to true if you are using postgres-formula
 
   nrpe:  # deprecated
     config:
@@ -55,8 +55,10 @@ icinga2:
         vars:
           jabber: alice@jabber.example.test
     user_groups:
-      icingaadmins:
-        display_name: "Icinga 2 Admin Group"
+      # Using `alt` because only want this in `users.conf`, as shown in the docs:
+      # - https://icinga.com/docs/icinga2/latest/doc/04-configuration/#usersconf
+      icingaadmins_alt:
+        display_name: "Icinga 2 Admin Group (alt)"
     templates:
       special-host:
         type: Host
@@ -111,17 +113,17 @@ icinga2:
       deprecated.example.com:
         remove: true
 
-    notifications:
-      'xmpp-host':
-        # opt-in to trigger application
-        apply_to: Host
-        conf:
-          users:
-            - alice
-          # defined by icinga.notification.xmpp
-          command: 'xmpp-host-notification'
-          assign:
-            - 'true'
+    # notifications:
+    #   'xmpp-host':
+    #     # opt-in to trigger application
+    #     apply_to: Host
+    #     conf:
+    #       users:
+    #         - alice
+    #       # defined by icinga.notification.xmpp
+    #       command: 'xmpp-host-notification'
+    #       assign:
+    #         - 'true'
 
     downtimes: {}
     # see 'notifications' above
