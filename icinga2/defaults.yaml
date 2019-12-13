@@ -41,6 +41,7 @@ icinga2:
       - icingaweb2
       - icingaweb2-module-doc
       - icingaweb2-module-monitoring
+    postgresql_service: postgresql
     postgresql_pkgs:
       - postgresql
     required_pkgs:
