@@ -1,5 +1,12 @@
 # Changelog
 
+# [0.9.0](https://github.com/saltstack-formulas/icinga2-formula/compare/v0.8.0...v0.9.0) (2019-12-16)
+
+
+### Features
+
+* **icinga_web2:** run postgres service after installing package ([9e8485e](https://github.com/saltstack-formulas/icinga2-formula/commit/9e8485ed3dc8359e9ebc9fc80559880dc19b2ecf))
+
 # [0.8.0](https://github.com/saltstack-formulas/icinga2-formula/compare/v0.7.1...v0.8.0) (2019-12-11)
 
 

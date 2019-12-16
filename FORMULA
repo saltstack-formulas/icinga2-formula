@@ -1,7 +1,7 @@
 name: icinga2
 os: Debian, Ubuntu, Raspbian, RedHat, Fedora, CentOS, Suse, openSUSE, FreeBSD, OpenBSD, Windows
 os_family: Debian, RedHat, Suse, FreeBSD, OpenBSDWindows, MacOS
-version: 0.8.0
+version: 0.9.0
 release: 1
 minimum_version: 2017.7
 summary: icinga2 formula
