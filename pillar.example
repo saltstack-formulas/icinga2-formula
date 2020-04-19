@@ -100,6 +100,8 @@ icinga2:
             vars:
               ssh_port: 43
               sla: "24x7"
+          obsolete_service:
+            remove: True
 
       # Minimalistic, supply only hostname
       example2.test: {}
