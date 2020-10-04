@@ -18,8 +18,6 @@ A salt formula that installs and configures icinga2, currently on Debian and Ubu
 installation source can be easily added. Configuration via pillar currently for hosts and
 services only.
 
-.. note::
-
 Suggestions, pull-requests, bug reports and comments are welcome.
 
 .. contents:: **Table of Contents**
