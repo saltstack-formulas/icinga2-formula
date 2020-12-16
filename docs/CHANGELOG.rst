@@ -2,6 +2,44 @@
 Changelog
 =========
 
+`0.10.0 <https://github.com/saltstack-formulas/icinga2-formula/compare/v0.9.0...v0.10.0>`_ (2020-12-16)
+-----------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **pillar.example:** fix ``yamllint`` violation [skip ci] (\ `c011aa6 <https://github.com/saltstack-formulas/icinga2-formula/commit/c011aa62935f58349c11941f867b3b2bac6ba139>`_\ )
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **gemfile:** restrict ``train`` gem version until upstream fix [skip ci] (\ `602d65f <https://github.com/saltstack-formulas/icinga2-formula/commit/602d65fff0cc4d762d8c2b8cd7e9759e6e6d1a4c>`_\ )
+* **gemfile.lock:** add to repo with updated ``Gemfile`` [skip ci] (\ `0749adc <https://github.com/saltstack-formulas/icinga2-formula/commit/0749adc99315ec174def2d3f5c15b3b4b6ba0945>`_\ )
+* **gitlab-ci:** use GitLab CI as Travis CI replacement (\ `753e00b <https://github.com/saltstack-formulas/icinga2-formula/commit/753e00b927ded5b2f15ed72c614d8f564b0fb22a>`_\ )
+* **kitchen:** avoid using bootstrap for ``master`` instances [skip ci] (\ `bcba572 <https://github.com/saltstack-formulas/icinga2-formula/commit/bcba57237b8ed86176faac65ad9e567e6f829a17>`_\ )
+* **kitchen:** use ``saltimages`` Docker Hub where available [skip ci] (\ `694a428 <https://github.com/saltstack-formulas/icinga2-formula/commit/694a428569c33337d34982df8aea020f1efa5216>`_\ )
+* **kitchen+travis:** remove ``master-py2-arch-base-latest`` [skip ci] (\ `623baad <https://github.com/saltstack-formulas/icinga2-formula/commit/623baade4b3ba5835167f40968ecef56e0fc9b6f>`_\ )
+* **pre-commit:** add to formula [skip ci] (\ `a4fb4f4 <https://github.com/saltstack-formulas/icinga2-formula/commit/a4fb4f4a5136340ddf5ac295e08b1731e4dacca3>`_\ )
+* **pre-commit:** enable/disable ``rstcheck`` as relevant [skip ci] (\ `e405733 <https://github.com/saltstack-formulas/icinga2-formula/commit/e4057336d83eb187a8c6ff52ccbd59856aac9553>`_\ )
+* **pre-commit:** finalise ``rstcheck`` configuration [skip ci] (\ `ab3c855 <https://github.com/saltstack-formulas/icinga2-formula/commit/ab3c85541dd7d7f12c55d21aae32a5e53a7b4614>`_\ )
+* **travis:** add notifications => zulip [skip ci] (\ `b65f633 <https://github.com/saltstack-formulas/icinga2-formula/commit/b65f6337bc28116ec1a78dd3ee501d60b5fbba63>`_\ )
+* **travis:** use ``major.minor`` for ``semantic-release`` version [skip ci] (\ `a37f569 <https://github.com/saltstack-formulas/icinga2-formula/commit/a37f5694b890d6643715bf3e3705e0e22355fef0>`_\ )
+* **workflows/commitlint:** add to repo [skip ci] (\ `c14014b <https://github.com/saltstack-formulas/icinga2-formula/commit/c14014b575f43de7c5ef2ba2defc40a461f93470>`_\ )
+
+Documentation
+^^^^^^^^^^^^^
+
+
+* **readme:** fix ``rstcheck`` violation [skip ci] (\ `ec5d9ff <https://github.com/saltstack-formulas/icinga2-formula/commit/ec5d9ffedb813260bfef69ba9c687986e83eb865>`_\ ), closes `/travis-ci.org/github/myii/icinga2-formula/builds/731606737#L259 <https://github.com//travis-ci.org/github/myii/icinga2-formula/builds/731606737/issues/L259>`_
+
+Features
+^^^^^^^^
+
+
+* **config:** allow removal of services (\ `6c1d059 <https://github.com/saltstack-formulas/icinga2-formula/commit/6c1d059be50ee598395057e9c7dd619ec5fe23a1>`_\ )
+
 `0.9.0 <https://github.com/saltstack-formulas/icinga2-formula/compare/v0.8.0...v0.9.0>`_ (2019-12-16)
 ---------------------------------------------------------------------------------------------------------
 
