@@ -128,6 +128,14 @@ control 'icinga2 `conf.d/templates/special-notification.conf` configuration' do
   end
 end
 
+control 'icinga2 `conf.d/users.conf` configuration' do
+  title 'should not exist'
+
+  describe file('/etc/icinga2/conf.d/users.conf') do
+    it { should_not exist }
+  end
+end
+
 control 'icinga2 `conf.d/users/alice.conf` configuration' do
   title 'should match desired lines'
 
