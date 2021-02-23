@@ -37,6 +37,11 @@ icinga2:
       password: ~
       host: 127.0.0.1
       port: 5432
+    login:
+      username: admin
+      # None => lets the state fail which is desired!
+      password:
+    schema_path: /usr/share/icingaweb2/etc/schema/pgsql.schema.sql
     pkgs:
       - icingaweb2
       - icingaweb2-module-doc

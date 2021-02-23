@@ -15,6 +15,10 @@ icinga2:
       db:
         # MUST BE SET when using icinga2.icinga-web2-database
         password: AnotherSecurePassword
+      login:
+        username: admin
+        # MUST BE SET for UI user "admin"
+        password:
       pkgs:
         - ...
       required_pkgs:
