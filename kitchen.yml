@@ -316,6 +316,7 @@ suites:
       state_top:
         base:
           '*':
+            - icinga2._mapdata
             - icinga2.icinga-web2
       pillars:
         top.sls:
