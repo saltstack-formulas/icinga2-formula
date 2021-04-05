@@ -167,6 +167,9 @@ include:
 
 ### Begin user configuration
 {%-   if conf.users is defined %}
+{{ icinga2.confd_dir }}/users.conf:
+  file.absent: []
+
 {{ icinga2.confd_dir }}/users:
   file.directory:
     - require:
