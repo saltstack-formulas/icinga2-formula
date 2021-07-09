@@ -3,6 +3,15 @@
 ---
 icinga2:
   lookup:  # See defaults.yaml and map.jinja for a better overview
+    config_dir: /etc/icinga2
+    confd_dir: /etc/icinga2/conf.d
+    check_command_dir: /etc/icinga2/conf.d/check_command
+    scripts_dir: /etc/icinga2/scripts
+    home_dir: /var/lib/nagios
+    user: nagios
+    group: nagios
+    postgresql_pkgs:
+      - postgresql-client
     service: icinga2
     pkgs:
       - icinga2
@@ -11,23 +20,49 @@ icinga2:
       db:
         # MUST BE SET when using icinga2.pgsql-ido
         password: SomeSecurePassword
+
+        name: icinga
+        user: icinga2ido
+        host: 127.0.0.1
+        port: 5432
+      schema_path: /usr/share/icinga2-ido-pgsql/schema/pgsql.sql
+      pkg: icinga2-ido-pgsql
     icinga_web2:
+      config_dir: /etc/icingaweb2
+      modules_dir: /usr/share/icingaweb2/modules
+      user: www-data
+      group: icingaweb2
       db:
         # MUST BE SET when using icinga2.icinga-web2-database
         password: AnotherSecurePassword
+
+        name: icinga2web
+        user: icinga2web
+        host: 127.0.0.1
+        port: 5432
       pkgs:
-        - ...
+        - icingaweb2
+        - icingaweb2-module-doc
+        - icingaweb2-module-monitoring
       required_pkgs:
-        - ...
+        - php-fpm
+        - php-pgsql
+        - libapache2-mod-php
+        - php-intl
+        - php-gd
+        - php-imagick
       features:
         api: false  # disable
         command: true  # enable
-        gelf: true
-        graphite: true
-        opentsdb: true
-        perfdata: true
-        statusdata: true
-        # ...
+        debuglog: false
+        gelf: false
+        graphite: false
+        influxdb: false
+        livestatus: false
+        opentsdb: false
+        perfdata: false
+        statusdata: false
+        syslog: false
 
     notification:
       xmpp:
@@ -133,5 +168,9 @@ icinga2:
 
   notification:
     xmpp:
+      pkg: python3-slixmpp
+      python_executable: python3
+      ca_file: /etc/ssl/certs/ca-certificates.crt
+
       jid: icinga@jabber.example.test
       password: supersecurerandomizeduniquepassword
