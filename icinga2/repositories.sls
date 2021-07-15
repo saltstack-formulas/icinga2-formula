@@ -3,7 +3,7 @@
 {% if grains['os'] == 'Debian' %}
 icinga_repo_required_packages:
   pkg.installed:
-    - name: python-apt
+    - name: python3-apt
     - require_in:
       - pkgrepo: icinga_repo
 
