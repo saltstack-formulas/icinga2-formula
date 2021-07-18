@@ -11,6 +11,7 @@ jobs:
       fail-fast: false
       matrix:
         instance:
+          # - default-debian-11-tiamat-py3
           # - default-debian-10-tiamat-py3
           # - default-debian-9-tiamat-py3
           # - default-ubuntu-2004-tiamat-py3
@@ -22,6 +23,7 @@ jobs:
           # - default-oraclelinux-7-tiamat-py3
           # - default-almalinux-8-tiamat-py3
           # - default-rockylinux-8-tiamat-py3
+          - default-debian-11-master-py3
           - default-debian-10-master-py3
           - default-debian-9-master-py3
           - default-ubuntu-2004-master-py3
@@ -41,6 +43,7 @@ jobs:
           # - default-gentoo-stage3-systemd-master-py3
           # - default-almalinux-8-master-py3
           # - default-rockylinux-8-master-py3
+          # - default-debian-11-3003-1-py3
           # - default-debian-10-3003-1-py3
           # - default-debian-9-3003-1-py3
           # - default-ubuntu-2004-3003-1-py3
@@ -58,6 +61,7 @@ jobs:
           # - default-arch-base-latest-3003-1-py3
           # - default-gentoo-stage3-latest-3003-1-py3
           # - default-gentoo-stage3-systemd-3003-1-py3
+          # - default-debian-11-3002-6-py3
           # - default-debian-10-3002-6-py3
           # - default-debian-9-3002-6-py3
           # - default-ubuntu-2004-3002-6-py3
