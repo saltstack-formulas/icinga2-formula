@@ -37,7 +37,7 @@ icinga_deps_repo_for_stretch:
 icinga_repo:
   pkgrepo.managed:
     - humanname: icinga_official
-    - name: deb http://packages.icinga.org/{{ icinga2.repo }} {{ dist }}
+    - name: deb http://packages.icinga.com/{{ icinga2.repo }} {{ dist }}
     - file: /etc/apt/sources.list.d/icinga.list
-    - key_url: http://packages.icinga.org/icinga.key
+    - key_url: http://packages.icinga.com/icinga.key
 {%- endif %}
