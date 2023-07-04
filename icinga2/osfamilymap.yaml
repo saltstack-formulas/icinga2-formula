@@ -24,7 +24,6 @@ FreeBSD:
       - php{{ freebsd_php_version }}-gd
       - php{{ freebsd_php_version }}-intl
       - php{{ freebsd_php_version }}-pgsql
-      - php{{ freebsd_php_version }}-gd
   ido:
     # In FreeBSD IDO is included in the icinga2 package.
     pkg: false
